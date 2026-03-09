@@ -1,0 +1,14 @@
+웹 : 프론트엔드와 백엔드로 나뉜다
+
+프론트엔드 : HTML CSS javascript 로 나뉜다
+		javascript -> 이벤트 처리, 활용,, 리엑트,,,
+
+백엔드 : jsp asp php로 나뉜다 -> 그 중 jsp (java server page)를 배운다, -> 수업에서 가장 우선적으로 배울 예정
+						asp -> c#기반의 서버 프로그램, 									
+						php -> c언어 같은데? 조금 다르다 - 독립적 언어 -> 잘 안할 예정
+						
+						이것들은 mvc -> model view controller
+
+
+
+
