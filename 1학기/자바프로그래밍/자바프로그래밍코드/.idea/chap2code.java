@@ -113,7 +113,15 @@ public class chap2code {
         // 입력되는 키를 byte로 리턴하는 저수준임
 
         //임포트 필요 (맨 위 코드 참고)
-        Scanner aaaa = New Scanner(System.in); // scanner 객체 생성
+        Scanner aaaa = new Scanner(System.in); // scanner 객체 생성
+        String name = aaaa.next();
+        int age = aaaa.nextInt();
+        double height = aaaa.nextDouble();
+        
+        
+        System.out.println("이름 : " + name);
+        System.out.println("나이 : "+ age);
+        System.out.println("키 : " + height);
     }
     
 }
