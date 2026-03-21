@@ -28,10 +28,32 @@ public class chap3장{
         //do구문은 조건에 관계없이 무조건 1번 실행함
         int shit = 0;
         do {
-            if(i%2 != 0)continue;
-            System.out.print(shit+","); 
+            if (shit % 2 != 0) {
+             shit++;
+             continue;   // 조건식으로 돌아감
+         }
+            System.out.print(shit + ",");
+            if(shit == 22) break;    //반복문 종료
             shit++;
-        }while(shit < 30);
+
+        } while (shit < 30);
+
+        System.out.println();
+        //배열
+        int intarray[];
+        int[] intArray;
+
+        intarray = new int[5];
+        int ii[] = new int[5]; //둘다 선언과 동시에 배열 생성함
+
+        int iii[] = {1,2,3,4,5};
+        //레퍼런스 치환으로 두 레퍼런스가 하나의 배열 공유
+        int myarray[] = iii;
+        System.out.println(myarray);
+        System.out.println(myarray[0]);
+
         
     }
+    
+        
 }

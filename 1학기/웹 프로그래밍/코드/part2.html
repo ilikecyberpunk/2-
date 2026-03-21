@@ -1,0 +1,136 @@
+<!DOCTYPE html>            <!--html문서를 선언한다-->
+<html>
+    <head> <!--메타 데이터 및 제목, 스타일, 스크립트 등을 포함한다-->
+        <title>첨</title>
+    </head>
+    <body>
+
+        <h1>안녕하세요</h1> 
+        <!--h6까지 있고 h1이 가장 크다-->
+
+        <p>이것은 html문서 입니다</p>
+        <!--paragragh = 문단을 표시한다-->
+        
+        <a href="https://lms.kumoh.ac.kr/ko">lms링크</a>
+        <br>
+        <a href = "https://namu.wiki/w/%EC%8B%A0%EC%84%B8%EA%B8%B0%20%EC%97%90%EB%B0%98%EA%B2%8C%EB%A6%AC%EC%98%A8">에반게리온 문서</a>
+
+        <!--a태그는 링크임,  이거 절대경로네-->
+
+        <img src="https://www.kumoh.ac.kr/_res/ko/img/common/logo@2x.png" alt="금오공대로고">
+        <img src = "https://i.namu.wiki/i/aG23mY1mlXp974WIiDFiRNU3vJC1nM9MMEKqdI4mO5oMUNIZW14TThcDuj0eXlud3Sd2JJEFjDuAEHrAdeUF3uhl74Do-nYOqj8tBw4hijjTLgiz69mbeMY45OMj_BY1CQubeSQGsyDDXRD_bubb_g.webp" alt = "에반게리온 사진" >
+
+        <br>   <!--줄바꿈-->
+
+        
+        <input type="button" value="버튼" > 
+        <!--클릭 가능한 버튼을 만든다-->
+
+        <br>
+        <!--표 태그-->
+        <table border = "1"> 
+            <tr>
+                <th>제목</th>
+                <th>제목1</th>
+                <th>제목2</th>
+            </tr>
+            <tr>
+                <td>데이터</td>
+                <td>데이터1</td>
+                <td>데이터2</td>
+            </tr>
+        </table>
+        
+        <br>
+
+        <table border = "1">
+            <tr>
+                <th colspan="2">이름</th> <!--하나의 셀을 여러 개의 열(column)에 걸쳐 합침-->
+                <th rowspan="2">직업</th> <!--하나의 셀을 여러 개의 행(row)에 걸쳐 합침-->
+            </tr>
+            <tr>
+                <td>김태호</td>
+                <td>alina </td>
+            </tr>
+        </table>
+
+        <br>
+        
+        <!--비디오태그-->
+        <video  width="500px" controls>
+            <source src = "./333819_medium.mp4" type = "video/mp4">
+        </video>
+
+        <iframe src="https://www.youtube.com/watch?v=y4ESzA57GsM" frameborder="0"></iframe>
+        
+        <!--목록태그-->
+        <!--unordered list 는 점같은걸로 나열되고 ordered list는 숫자로 나열된다-->
+        <ul>
+            <li>사람1</li>
+            <li>사람2</li>
+            <li>사람3</li>
+        </ul>
+        <ol>
+            <li>person</li>
+            <li>puppy</li>
+            <li>kitty</li>
+        </ol>
+
+        <!--시멘틱 태그-->
+        <!--- Semantic(시맨틱) = "의미론적인"이라는 뜻, 시멘틱 태그는 웹 페이지의 각 부분이 어떤 역할을 하는지 명확히 나타내는 HTML 태그-->
+        <!--header 영역 = 웹 페이지의 머리말-->
+        <!--nav 영역 = 웹페이지에서 menu역할을 하는 링크를 만든다-->
+        <header>
+            <h1>Welcome to my website !!!</h1>
+            <nav>
+                <ol>
+                    <h1><li>Why</li></h1>
+                    <p>i made this for just practicing html.. nothing Semantic reason</p>
+                    <li>So?</li>
+                    <p>just get out and do ur task. hope u having great day !!!</p>
+                </ol>
+            </nav>
+        </header>
+        <main>
+
+	        <section>    <!--<section> 태그는 HTML 시멘틱 태그 중 하나로, 문서 안에서 주제별로 구분되는 콘텐츠 영역을 나타낼 때 사용합니다-->
+	            <h2>시멘틱 태그란?</h2>
+	            <p>시멘틱 태그는 HTML 요소의 의미를 명확하게 나타냅니다.</p>
+	        </section>
+
+	        <article>  <!--<article> 태그는 독립적으로 배포하거나 재사용할 수 있는 콘텐츠 블록을 나타내는 시멘틱 태그-->
+	            <h2>HTML5 시멘틱 태그의 중요성</h2>
+	            <p>검색 엔진 최적화(SEO)와 웹 접근성을 높일 수 있습니다.</p>
+	        </article>
+
+	    </main>
+
+	    <aside>  <!--본문과 직접적인 관련은 없지만, 보조적인 정보나 참고 자료를 담는 영역을 의미하는 시멘틱 태그-->
+	        <h3>관련 링크</h3>
+	        <ul>
+	            <li><a href="#">HTML 기본 문법</a></li>
+	             <li><a href="#">CSS 입문</a></li>
+	        </ul>
+	    </aside>
+
+
+	    <footer> <!--<footer> 태그는 문서나 섹션의 맨 아래에 위치하는 영역을 의미하는 시멘틱 태그예요. 보통 저작권 정보, 연락처, 사이트 맵, 관련 링크 같은 마무리 정보를 담을 때 사용합니다-->
+	        <p>© 2025 My Website. All rights reserved.</p>
+	    </footer>
+
+
+        <!--HTML에서 <input>요소는 사용자로부터 데이터를 입력받기 위해 사용된다.-->
+        <table border = "1">
+            <tr>
+                <td>아이디</td>
+                <td><input type="text" name = "ids" value="아이디를 입력하세요"></td>
+            </tr>
+            <tr>
+                <td>비번</td>
+                <td><input type = "text" name = "password" value = "1234"></td>
+            </tr>
+        </table>
+
+        
+    </body>
+</html> 

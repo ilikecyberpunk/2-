@@ -156,10 +156,12 @@ public class chap2장 {
             default:
                 System.out.println("탈락입니다.");
         }
+        
+        
 
         //◼ 언젠가break를 만날때까지계속내려가면서실행
         //그래서 잘못하면 무한번 실행할 수 있음
-
+        
 
         
 

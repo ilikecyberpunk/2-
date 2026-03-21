@@ -56,5 +56,12 @@ public class chap2주차문법기초재정렬{
         BigDecimal sum = result2.add(result3);
         System.out.println(sum);
 
+        //삼항 연산자 우선순위
+        int age = 20;
+        String r = (age > 19) ? "성인" : "꼬맹이"; 
+        int r1 = age > 20 ? 1 : 1+2; //이거 이렇게 괄호 안씌우면 조건 안따지고 1+2부터 함 산술이 조건보다 더 우선순위라
+        
+
+
     }
 }
