@@ -1,6 +1,21 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 public class practice{
+    int radius;
+    String name;
+
+    public practice(){
+        radius = 1; name = "";
+    }
+
+    public practice(int r, String n){
+        radius = r; name = n;
+    }
+
+    public double getArea(){
+        return 3.14*radius*radius;
+    }
+
     public static void main(String[] args){
         // int i, sum = 0;
 
@@ -80,24 +95,34 @@ public class practice{
         // System.out.println("전체학년 평균은 " + sum/(n*m));
         // }
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("정수 3개를 입력하세요 ");
-        int sum = 0, n = 0;
-        for(int i = 0; i < 3; i++){
-            System.out.print(i + ">>");
-            try{
-                n = scanner.nextInt();
-            }
-            catch(InputMismatchException e){
-                String ex = scanner.nextLine();
+    //     Scanner scanner = new Scanner(System.in);
+    //     System.out.println("정수 3개를 입력하세요 ");
+    //     int sum = 0, n = 0;
+    //     for(int i = 0; i < 3; i++){
+    //         System.out.print(i + ">>");
+    //         try{
+    //             n = scanner.nextInt();
+    //         }
+    //         catch(InputMismatchException e){
+    //             String ex = scanner.nextLine();
 
-                System.out.println("정수가 아닙니다 다시 입력하세요");
-                i --;
-                continue;
-            }
-            sum += n;
-        }
-        System.out.println("합은 " + sum);
-        scanner.close();
-    }
+    //             System.out.println("정수가 아닙니다 다시 입력하세요");
+    //             i --;
+    //             continue;
+    //         }
+    //         sum += n;
+    //     }
+    //     System.out.println("합은 " + sum);
+    //     scanner.close();
+    // }
+
+    practice pizza = new practice(10, "자바피자");
+    double area = pizza.getArea();
+    System.out.println(pizza.name + "의 면적은 : " + area);
+    
+    practice donut = new practice(); // Circle 객체 생성, 반지름 1
+    donut.name = "도넛피자";
+    area = donut.getArea();
+    System.out.println(donut.name + "의 면적은 " + area);
+}
 }
