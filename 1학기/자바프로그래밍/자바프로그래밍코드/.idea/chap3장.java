@@ -52,7 +52,34 @@ public class chap3장{
         System.out.println(myarray);
         System.out.println(myarray[0]);
 
+        //배열의 크기 = length
+        System.out.println("배열의 크기 : "+myarray.length);
         
+        //for each문
+        int h[] = {1,2,3,4,5};
+        int kum = 0;
+        for(int k : h){
+            kum += k;
+        }
+        System.out.println(kum);
+        
+        //2차원 배열
+        int dimention2[][] = new int[2][5];
+        int dimention2_1[][] = {
+            {1,2,3},
+            {4,5,6}
+        };
+
+        //예외 처리
+        try{
+            int a;
+        }
+        catch(Exception e){
+            System.out.println("오류입니다");
+        }
+        finally{
+            System.out.println("try문에서 오류 나든 말든 얘는 실행된다");
+        }
     }
     
         
