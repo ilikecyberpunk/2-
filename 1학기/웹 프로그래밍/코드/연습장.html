@@ -1,10 +1,59 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>제목 입니다</title>
+        <title>실습</title>
+        <style>
+
+            div{
+                color : red;
+                font-size : 30px;
+            }
+
+            .test1{
+                color : blue;
+                font-size : 30px;
+            }
+
+            #test2{
+                color : green;
+                font-size : 40px;
+            }
+
+            div > p{
+                color : yellow;
+                font-size : 35px;
+            }
+
+            div b{
+                color : blue;
+                font-size : 25px;
+            }
+
+            input[type = "text"]{
+                border:1px solid #ccc;
+            }
+
+        </style>
     </head>
     <body>
-        <h1>h1태그 입니다</h1>
-        <h6>h6태그입니다</h6>
+        <div>css가 적용된 태그 입니다</div>
+        <div class = "test1">css가 적용된 태그 입니다</div> <!--클래스 선택자-->
+        <div id = "test2">css가 적용된 태그 입니다</div> <!--아이디 선택자-->
+
+        <div>
+            <p>
+                조합 선택자를 사용하여 css를 적용시킵니다 <!--자식선택자-->
+            </p>
+            <b>
+                조합 선택자를 사용하여 css를 적용시킵니다 <!--후손선택자-->
+            </b>
+        </div>
+
+        <h1>ㅇ</h1>
+        <h2>ㅇ</h2>
+        <h3>ㅇ</h3>
+
+        <input type="text" name = "ids" value = "css테스트">
+
     </body>
 </html>

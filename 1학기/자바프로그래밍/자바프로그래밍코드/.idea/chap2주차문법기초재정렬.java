@@ -1,6 +1,5 @@
 import java.math.BigDecimal;
 import java.util.Scanner;
-
 public class chap2주차문법기초재정렬{
     public static void main(String[] args){
 
@@ -18,6 +17,18 @@ public class chap2주차문법기초재정렬{
 
         //final 키워드 : 변수를 상수로 표현 -> 값 변경 불가능
         final int num = 10;
+        final double shit = 12.23;
+
+        //equals는 값의 내용이 같은지
+        // == 는 메모리 주소가 같은지이다
+        String aa = "kk";
+        String aaa = "kk";
+        String aaaa = new String("kk");
+
+        System.out.println("시파");
+    
+        System.out.println(aa == aaaa);
+        System.out.println(aaa.equals(aaaa));
         
 
         //연산자 우선순위 실수 빈발 케이스 1 : 산술 vs 비교
@@ -27,10 +38,10 @@ public class chap2주차문법기초재정렬{
         boolean result = a + b > c;  // 산술이 먼저 된 후 비교한다 -> 의도가 다르면 ()씌워
 
         // 케이스2: 논리연산자(&& vs ||)
-        boolean aa = true;
+        boolean aa1 = true;
         boolean bb = false;
         boolean cc = true;
-        boolean rresult = aa || bb && cc;  // &&(and) 연산이 ||(or) 연산보다 우선이라 bb &&cc 하고 aa||함
+        boolean rresult = aa1 || bb && cc;  // &&(and) 연산이 ||(or) 연산보다 우선이라 bb &&cc 하고 aa||함
 
         //케이스 3 : 증감 연산자 
         int i = 5;
@@ -60,7 +71,38 @@ public class chap2주차문법기초재정렬{
         int age = 20;
         String r = (age > 19) ? "성인" : "꼬맹이"; 
         int r1 = age > 20 ? 1 : 1+2; //이거 이렇게 괄호 안씌우면 조건 안따지고 1+2부터 함 산술이 조건보다 더 우선순위라
-        
+
+        //표준 입출력과 문자열 
+        Scanner inpu = new Scanner(System.in);
+
+        //문자열 입력받기
+        System.out.print("문자열을 입력하세요 : ");
+        String num11 = inpu.nextLine();
+
+        //숫자 입력받기
+        System.out.print("정수를 입력하세요 : ");
+        int num22 = inpu.nextInt();
+        System.out.print("실수를 입력하세요 : ");
+        double num33 = inpu.nextDouble();
+
+        //문자열 분활하기
+        String data = "사과, 바나나, 오랜지";
+        String[] fruit = data.split(",");
+        System.out.println(fruit);
+
+        //숫자로 변환하기
+        String nigger = "123";
+        try{
+            int data_int = Integer.parseInt(nigger);
+            System.out.println(data_int);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        finally{
+            System.out.println("휴 끝 시파");
+        }
+
 
 
     }
