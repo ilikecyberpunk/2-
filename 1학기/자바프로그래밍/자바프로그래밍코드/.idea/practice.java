@@ -1,20 +1,47 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 public class practice{
-    int radius;
-    String name;
+    // int radius;
+    // String name;
 
-    public practice(){
-        radius = 1; name = "";
-    }
+    // public practice(){
+    //     radius = 1; name = "";
+    // }
 
-    public practice(int r, String n){
-        radius = r; name = n;
-    }
+    // public practice(int r, String n){
+    //     radius = r; name = n;
+    // }
 
-    public double getArea(){
-        return 3.14*radius*radius;
+    
+    // public double getArea(){
+    //     return 3.14*radius*radius;
+    // }
+
+    
+class Point{
+    private int x, y;
+    public void set(int x, int y){
+        this.x = x;
+        this.y = y;
+
     }
+    public void showPoint(){
+        System.out.println("("+x+","+y+")");
+    }
+}
+
+class ColorPoint extends Point{
+    private String color;
+    public void setColor(String color){
+        this.color = color;
+    }
+    public void showColorPoint(){
+        System.out.print(color);
+        showPoint();
+    }
+}
+
+
 
     public static void main(String[] args){
         // int i, sum = 0;
@@ -116,13 +143,20 @@ public class practice{
     //     scanner.close();
     // }
 
-    practice pizza = new practice(10, "자바피자");
-    double area = pizza.getArea();
-    System.out.println(pizza.name + "의 면적은 : " + area);
+    // practice pizza = new practice(10, "자바피자");
+    // double area = pizza.getArea();
+    // System.out.println(pizza.name + "의 면적은 : " + area);
     
-    practice donut = new practice(); // Circle 객체 생성, 반지름 1
-    donut.name = "도넛피자";
-    area = donut.getArea();
-    System.out.println(donut.name + "의 면적은 " + area);
+    // practice donut = new practice(); // Circle 객체 생성, 반지름 1
+    // donut.name = "도넛피자";
+    // area = donut.getArea();
+    // System.out.println(donut.name + "의 면적은 " + area);
+
+    practice b = new practice();
+    Point a = b. new Point();
+    
+    a.set(12,425);
+    a.showPoint();
+
 }
 }

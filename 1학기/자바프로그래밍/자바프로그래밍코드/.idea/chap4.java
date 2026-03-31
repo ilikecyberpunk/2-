@@ -40,10 +40,29 @@ public class chap4 {
         }
 
     }
+
+    public class for_this{
+
+        //클래스의 맴버변수랑 생성자 매개변수랑 이름이 같으면?
+        //객체 자신에 대한 레퍼런스인 this활용
+
+        int a;
+
+        public for_this(){
+            this.a = 0;
+        }
+
+        public for_this(int a){
+            this.a = a;   //이러면 맴버변수 a가 매개변수 a를 대입
+        }
+    }
+
     public static void main(String[] args){
         chap4 a = new chap4(132, "ㅅㅂ");
 
         monster p = a.new monster(32,34);
+
+        
         
     }   
 
