@@ -45,15 +45,41 @@ public class chap4 {
 
         //클래스의 맴버변수랑 생성자 매개변수랑 이름이 같으면?
         //객체 자신에 대한 레퍼런스인 this활용
-
-        int a;
+        int hp;
 
         public for_this(){
-            this.a = 0;
+            this.hp = 0;
         }
 
-        public for_this(int a){
-            this.a = a;   //이러면 맴버변수 a가 매개변수 a를 대입
+        public for_this(int hp){
+            this.hp = hp;   //이러면 맴버변수 hp가 매개변수 hp를 대입
+        }
+
+        public void set_hp(int hp){
+            this.hp = hp;
+            System.out.println(this.hp);
+        }
+    }
+
+    public class book{
+        String title;
+        String author;
+        void show(){
+            System.out.println(title + " " + author);
+        }
+
+        public book(){
+            this("", "");  //이거 생성자 내에서만 쓸 수 있고, 코드 중 가장 처음에 있어야함
+            System.out.println("생성자 호출됨");
+        }
+
+        public book(String title){
+            this(title, "");
+        }
+
+        public book(String title, String author){
+            this.title = title;
+            this.author = author;
         }
     }
 
@@ -62,6 +88,14 @@ public class chap4 {
 
         monster p = a.new monster(32,34);
 
+        //이렇게 하면 어쩔래
+        chap4 n = new chap4();
+        for_this i = n.new for_this(12);
+        i.set_hp(234);  //생성자로 매개변수에 12 값 줘도 234로 해버리네
+        
+        //this()
+        book b = a.new book("벌레");
+        b.show();    //벌레만 출력됨 뒤에 author값 안나옴 
         
         
     }   

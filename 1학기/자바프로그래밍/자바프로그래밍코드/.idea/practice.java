@@ -154,9 +154,11 @@ class ColorPoint extends Point{
 
     practice b = new practice();
     Point a = b. new Point();
-    
+
     a.set(12,425);
     a.showPoint();
+
+    
 
 }
 }
