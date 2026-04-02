@@ -3,22 +3,35 @@
 	<head>
 	<title>마진과 패딩 예제</title>
 	<style>
-	    .ex1{
-		    margin: 0px;
-		    padding: 0px;
-		    background-color:red;
-		    border: 1px solid black;
-	    }
-	    .ex2{
-		    margin: 10px;
-		    padding: 20px;
-		    background-color:blue;
-		    border: 1px solid black;
-	    }
-	</style>
+	ul {
+		list-style: none;
+		text-align: center;
+		border-top: 1px solid red;
+		border-bottom: 1px solid red;
+		padding: 10px 0;
+	}
+	ul li {
+		display: inline;
+		text-transform:uppercase;
+		padding: 0 10px;
+		letter-spacing: 10px;
+	}
+	ul li a {
+		text-decoration: none;
+		color:black;
+	}
+	ul li a:hover {
+		text-decoration: underline;
+	}
+</style>
 	</head>
 	<body>
-		<div class="ex1"><b>마진과 패딩 테스트1</b></div>
-		<div class="ex2"><b>마진과 패딩 테스트2</b></div>
+		<ul>
+	        <li><a href="https">Home</a></li>
+	        <li><a href="#">Blog</a></li>
+            <li><a href="#">Abort</a></li>
+	        <li><a href="#">Contact</a></li>
+        </ul>
+        
 	</body>
 </html>
