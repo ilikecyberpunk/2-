@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>part3-1</title>
+        <style>
+            /* 박스 모델 */
+            /* contents : 박스의 실제 내용 */
+
+            /* padding : 내용와 태두리(border) 사이의 여백 */
+            /* border : 내용과  패딩을 둘러싸는 경계선*/
+            /* margin : 요소와 다른 요소들 사이의 바깥쪽 여백 */
+            
+            .box{
+                background-color: lightblue;
+                border : 3px solid navy;
+                padding : 140px;
+                margin : 30px;
+
+                width : 200px;
+                height : 100px;
+
+                text-align : center;
+                line-height : 100px;
+            }
+
+            /* border의 종류: none, dotted, dashed, solid, double, groove, ridge, inset, outset */
+            /* 경계선의 폭 :  thin, medium, thick or px */
+            .p{
+                border-style : double;
+                border-width : thick;
+                border-color : pink;
+
+                padding : 23px;
+                width : 150px;
+            }
+
+            /* 둥근 경계선 만들기 */
+            .radius{
+                border : 3px solid blue;
+                border-radius : 40px;
+                padding : 23px; 
+            }
+
+/* 
+   📦 Padding vs Margin 차이
+ */
+/* 🔹 Padding (패딩)
+   - 요소의 내부 공간을 확장한다.
+   - 내용(content) 테두리(border) 사이의 여백
+   - 요소의 배경색(background-color)과 이미지가 padding 영역까지 적용된다.
+*/
+
+/* 🔹 Margin (마진)
+   - 요소의 외부 공간을 조정한다.
+   - 다른 요소와의 간격(거리)을 만든다.
+   - margin 영역에는 배경색이나 이미지가 적용되지 않는다.
+*/
+            .ex1{
+                margin : 0px;
+                padding : 0px;
+                background-color : red;
+                border : 1px solid black;
+            }
+
+            .ex2{
+                margin : 10px;
+                padding : 20px;
+                background-color : blue;
+                border : 1px solid black;
+            }
+
+            /* ul태그에 스타일 지정 ㄱㄴ */
+            .ul_style1{
+                list-style-type: circle;
+                color : darkgreen;
+            }
+            .ul_style2{
+                list-style-type : square;
+                color : darkorchid;
+            }
+            /* ol도 ㄱㄴ */
+            .ol_style1{
+                list-style-type : upper-roman;
+            }
+            .ol_style2{
+                list-style-type : lower-alpha;
+            }
+
+            /* 네비게이션 바 만들기 = navigation_making파일 참고 */
+            /* ul{
+                list-style : none;
+                text-align : center;
+
+                border-top : 1px solid blue;
+                border-bottom: solid 1px red;
+
+                padding : 10px;
+            }
+            ul li {
+                display : inline;  목록 항목을 가로로 나열
+                text-transform: uppercase;   글자를 모두 대문자로 변환
+                padding: 10px;
+                letter-spacing: 10px;    글자간격 
+            }
+
+            ul li a{
+                text-decoration: none;  링크 밑줄 제거 
+                color : black;
+            }
+
+            ul li a:hover {
+		        text-decoration: underline;  마우스 올리면 밑줄 표시 
+
+	        } */
+
+
+        </style>
+    </head>
+    <body>
+        <div class = "box">박스모델</div>
+        <p class = "p">앙기모띠</p>
+        <p class = "radius">둥글게</p>
+        <h1 class = "ex1">예시1</h1>
+        <h1 class = "ex2">예시2 입니다</h1>
+        <ul class = "ul_style1">
+            <li>attribute1</li>
+            <li>attribute2</li>
+            <li>attribute3</li>
+        </ul>
+        <ul class = "ul_style2">
+            <li>fk</li>
+            <li>you</li>
+        </ul>
+        <ol class = "ol_style1">
+            <li>attribute1</li>
+            <li>attribute2</li>
+            <li>attribute3</li>
+        </ol>
+        <ol class = "ol_style2">
+            <li>attribute1</li>
+            <li>attribute2</li>
+            <li>attribute3</li>
+        </ol>
+
+        <!-- <ul>
+            <li ><a href="hi"></a></li>
+        </ul> -->
+    </body>
+</html>

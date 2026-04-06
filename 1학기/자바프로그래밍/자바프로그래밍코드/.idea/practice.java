@@ -18,28 +18,58 @@ public class practice{
     // }
 
     
-class Point{
-    private int x, y;
-    public void set(int x, int y){
-        this.x = x;
-        this.y = y;
+// class Point{
+//     private int x, y;
+//     public void set(int x, int y){
+//         this.x = x;
+//         this.y = y;
 
-    }
-    public void showPoint(){
-        System.out.println("("+x+","+y+")");
-    }
+//     }
+//     public void showPoint(){
+//         System.out.println("("+x+","+y+")");
+//     }
+// }
+
+// class ColorPoint extends Point{
+//     private String color;
+//     public void setColor(String color){
+//         this.color = color;
+//     }
+//     public void showColorPoint(){
+//         System.out.print(color);
+//         showPoint();
+//     }
+// }
+abstract class Calculator {
+public abstract int add(int a, int b);
+public abstract int subtract(int a, int b);
+public abstract double average(int[] a);
 }
 
-class ColorPoint extends Point{
-    private String color;
-    public void setColor(String color){
-        this.color = color;
-    }
-    public void showColorPoint(){
-        System.out.print(color);
-        showPoint();
-    }
+public class GoodCalc extends Calculator {
+@Override
+public intadd(inta, intb) { // 추상메소드구현
+    return a + b;
 }
+@Override
+public intsubtract(inta, intb) { // 추상메소드구현
+return a -b;
+}
+@Override
+public double average(int[] a) { // 추상메소드구현
+double sum = 0;
+for (int i = 0; i < a.length; i++)
+sum += a[i];
+return sum/a.length;
+}
+public static void main(String [] args) {
+GoodCalcc = new GoodCalc();
+System.out.println(c.add(2,3));
+System.out.println(c.subtract(2,3));
+System.out.println(c.average(new int[] { 2,3,4 }));
+}
+}
+
 
 
 
@@ -152,11 +182,11 @@ class ColorPoint extends Point{
     // area = donut.getArea();
     // System.out.println(donut.name + "의 면적은 " + area);
 
-    practice b = new practice();
-    Point a = b. new Point();
+    // practice b = new practice();
+    // Point a = b. new Point();
 
-    a.set(12,425);
-    a.showPoint();
+    // a.set(12,425);
+    // a.showPoint();
 
     
 

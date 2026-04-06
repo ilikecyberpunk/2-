@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>네비게이션 예제</title>
+        <style>
+            /* 네비게이션 바 만들기 */
+            ul{
+                list-style : none;
+                text-align : center;
+
+                border-top : 1px solid blue;
+                border-bottom: solid 1px red;
+
+                padding : 10px;
+            }
+            ul li {
+                display : inline;  /*목록 항목을 가로로 나열*/
+                text-transform: uppercase;   /*글자를 모두 대문자로 변환*/
+                padding: 10px;
+                letter-spacing: 20px; /*   글자간격 */
+            }
+
+            ul li a{
+                text-decoration: none; /* 링크 밑줄 제거 */
+                color : black;
+            }
+
+            ul li a:hover {
+		        text-decoration: underline; /* 마우스 올리면 밑줄 표시 */
+
+	        }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li><a href="###">안녕하세요</a></li>
+        </ul>
+    </body>
+</html>
