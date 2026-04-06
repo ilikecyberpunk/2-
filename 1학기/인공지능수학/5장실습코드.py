@@ -3,7 +3,7 @@ def EuclidDist(a, b):
     sum = 0
     for i in range(len(a)):
         sum += (a[i] - b[i])**2
-    sum = sum*(1/2)
+    sum = sum**(1/2)
     print(sum)
     return sum
 
