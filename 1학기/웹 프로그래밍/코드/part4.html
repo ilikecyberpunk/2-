@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chap4</title>
+        <style>
+            #for_4_15{
+                width : 100px;
+                padding : 8px;
+                margin-top : 5px;
+                margin-bottom : 15px;
+                border : solid blue 2px;
+                border-radius : 4px;
+                background-color : wheat;
+                box-sizing: border-box; /*box-sizing = 요소의 크기를 계산하는 방식, border-box = width, height가 콘텐츠 paddinf border까지 포함한 전체 크기*/
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 박스모델과 응용 14번 -->
+        <h2>상품명</h2>
+        <p>받으신 상품을 평가해주세요</p>
+        <div>
+            <form> <!--사용자가 입력한 정보를 외부로 전달-->
+                <p>
+                    <label for="nick">이름</label>  <!--주로 입력 태그 설명용?-->
+                    <input type = "text" id="nick" name = "nick" placeholder = "이름">   <!--id="nick" → 이 입력 필드의 고유 식별자(ID). <label for="nick"> 같은 라벨과 연결할 때 사용됩니다.-->
+                                                                     <!-- placeholder="이름" → 입력창 안에 흐리게 표시되는 안내 문구. 사용자가 입력을 시작하면 사라집니다. -->
+                </p>
+                <p>
+                    <label for="email">이메일</label>
+                    <input type="text" id = "email" name = "email" placeholder = "이메일">
+                </p>
+                <p>
+                    <label for="rate_product">상품평</label>
+                    <textarea name = "상품평" id = "rate_product" placeholder = "상품을 평가해주세요" style = "height : 100px;"></textarea>   <!--여러 줄의 텍스트를 입력할 수 있는 영역-->
+                </p>
+                <p>
+                    <input type="button" value = "submit">
+                </p>
+
+                <div>
+                    <p>
+                        <p>이름</p>
+                        <input type="text" id ="for_4_15" placeholder = "이름   ">
+                    </p>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
