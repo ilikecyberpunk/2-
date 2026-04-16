@@ -53,6 +53,7 @@ public class chap2장 {
         //리터럴 -> 프로그램에서 직접 표현한 값, 정수 실수 문자 논리 문자열 리터럴 있음
         //값 자체를 직접 코드에 적어 놓은 것  =  실수 리터럴60.3, 문자열 리터럴'c'
 
+
         //정수 리터럴 -> 10진수 8진수 16진수 2진수 리터럴
         //15 -> 10진수 15
         // 015 -> 0부터 시작하면 8진수.. 10진수로 13
@@ -71,19 +72,24 @@ public class chap2장 {
         // 기본 타입에 사용 불가
         // int n = null;  -> 에러
         String str = null;
+        String srt_1 = null;
 
         //문자열 리터럴
         String st = "Good";
+        String st_1 = "GOOD how are you";
 
         //상수
         // 변경 불가능 한 수 -> 수정 불가
         // final 키워드 사용
         final double PI = 3.141592;
+        final int my_dih = 16;
 
         //var 키워드 
         // 지역 변수의 타입을 자동으로 추론해 주는 키워드
         var n = 10; //int로 자동 추론
         var text = "mommy"; // String으로 추론
+        var text_1 = 12412;
+        // var name; 이러면 오류남 -> 초기값 설정해야함
 
         //타입 변환
         //자동 타입 변환
