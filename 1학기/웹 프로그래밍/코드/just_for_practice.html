@@ -2,61 +2,69 @@
 <html>
   <head>
     <meta charset = "UTF-8">
-    <title>연습장</title>
+    <title>제목입니다.</title>
     <style>
-      ul{
-        list-style-type : none;
-        border-top : solid 2px red;
-        border-bottom : solid 2px red;
-        padding : 10px;
-        text-align : center;
-        font-size : 50px;
+      [title = "제목"]{
+        font-weight : thick;
       }
 
-      ul li{
-        display : inline;
-        letter-spacing : 10px;
-        text-transform : uppercase;
-        margin-right : 20px;
+      body{
+        height : 1000px;
       }
 
-      ul li a{
-        text-decoration : none;
-        color : black
+      div{
+        margin : auto auto;
+        transform : scale(1.34, 1.3);
+        background-color : blue;
+        width : 100px;
+        height : 100px;
       }
-      ul li a:hover{
+
+      a[href$=".pdf"]{
+        font-weight : thick;
         text-decoration : underline;
+        opacity : 0.3;
+        color : white;
+        background-color :black;
+
+        position : static;
+        left : 50%;
+        top : 50%;
+
+        font-weight : 900;
+      }
+
+      input[type = "text"]:active{
+        background-color : orange;
+      }
+
+      img{
+        transform : translate(100px, 50px);
+        /* transform : rotate(30deg); */
+        /* transform : skew(30deg, 50deg); */
+        transform : scale(1.1, 2.1);
+
+        position : fixed;
+        right : 20px;
+        top : 10px;
         
       }
 
-      td{
-        padding : 50px;  
-       }
 
-       tr:nth-child(even){
-          background-color : blue;     
-       }
-
-    </style>
+    </style>    
   </head>
   <body>
-    <ul>
-      <li><a href = "###">wyd</a></li>
-      <li><a href="####">sdfsfdfs</a></li>
-    </ul>
+    <div>
+      <a href = "sdfsdfsdfsdf.pdf">안녕하세요</a>
+    </div>
 
-    <br>
+    <label for = "name">이름</label>
+    <input type = "text" id = "name" name = "이름" placeholder = "이름을 입력하세요"/>
 
-    <table>
-      <tr>
-        <td>ㄱㄱㄱ</td>
-        <td>ㄴㄴㄴ</td>
-      </tr>
-      <tr>
-        <td>ㄷㄷㄷ</td>
-        <td>ㄹㄹㄹ</td>
-      </tr>
-    </table>
-    
+    <img width = "300px" height = "300px" alt = "tq" src = "ymyphoto-ai-generated-8689197_1920.jpg">
+
+    <iframe src = "just_for_practice.html" scrolling = "auto" height = "800px" frameborder = "1"></iframe>
+
   </body>
+  
 </html>
