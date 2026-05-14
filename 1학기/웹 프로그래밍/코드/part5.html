@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>part5</title>
+    <meta charset="UTF-8">
+    <style>
+        .head {
+            text-align: center;
+            font-weight: 900;
+            font-size: 50px;
+            border-top: 1px solid red;
+            border-bottom: 1px solid red;
+            letter-spacing: 5px;
+            transform: skew(10deg, 5deg);
+        }
+
+        .for_explanation {
+            border: 1px solid red;
+            position: absolute;
+            left: 30px;
+        }
+
+        .s{
+            display : inline;
+            
+        }
+
+        .working{
+            display : inline;
+            border : 1px blue dotted;
+            border-radius : 30px;
+        }
+
+        .for_for{
+            border : 5px solid green;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="head">part5 for js</h1>
+
+    <h2 id="인사">hihi</h2>
+
+    <h3 id = "작별인사"></h3>
+
+
+
+
+
+    <div>
+        <p class = "s">result : </p>
+        <p class = "s" id = "for_result"></p>
+    </div>
+    
+
+
+
+
+
+    <div>
+        <h2 class = "working">뭔요일인고 : </h2>
+        <h2 class = "working" id = "working"></h2>
+    </div>
+
+
+
+
+    <div>
+        <h2 class = "for_for"></h2>
+    </div>
+
+
+
+
+
+
+
+    <div style="border: 1px solid red;">
+        <script>
+            let aa = "안녕";
+            document.getElementById("인사").innerHTML = aa;
+
+            let bb = "잘가";
+            document.getElementById("작별인사").innerHTML = bb;
+
+            //자바 스크립트의 자료형
+            // 기본타입 : string, number, boolean, null, underfined, symbol
+            // 참조타입 : object, array, function
+            let str = "hello";
+            let pi = 3.14;
+            let isTrue = true;
+            let obj = {name : "Alice", age : 25};
+
+            console.log(typeof(obj));
+            console.log(typeof(pi)); // number
+            console.log(typeof(str));
+
+            let result2 = "12235";
+            let result3 = "dd";
+
+            result2 = Number(result2);
+            result3 = Number(result3);
+
+            console.log(result2);
+            console.log(result3); // Nan뜸 = 숫자 연산에 실패함
+
+            let result = "10" + 5;
+            let result1 = 5 + "10"; //암묵적으로 5가 string으로 형변환됨
+
+            document.write(result + "<br>");
+            document.write(result1 + "<br>");
+
+
+            let x;
+            document.write(x + "<br>");
+            document.write(typeof(x) + "<br><br>")
+
+            let t = "how r u " + "today";
+            document.write(t + "<br>");
+            document.write(t.toUpperCase() + "<br><br>");
+
+            let person = {name : "charles", age : "22", gender : "male", country : "UK"};
+            document.write(person.name + "<br>");
+            document.write(typeof(person.name) + "<br>"); // string
+
+
+            //조건문
+            let a1 = 12;
+            let b1 = 23;
+            if(a1 > b1){
+                document.getElementById("for_result").innerHTML = "a1이 b1보다 큼";
+            }
+            else if(a1 === b1){
+                document.getElementById("for_result").innerHTML = "a1과 b1이 같음";
+            }
+            else{
+                document.getElementById("for_result").innerHTML = "a1이 b1보다 작음";
+            }
+
+            let day = "monday";
+            switch(day){
+                case "monday":
+                    document.getElementById("working").innerHTML = "월요일입니다";
+                    break;
+                case "thursday":
+                    document.getElementById("working").innerHTML = "ncncncncnc";
+                    break;
+                case "friday":a1
+                    document.getElementById("working").innerHTML = "not nc anymore";
+                    break;
+            }
+
+            let fd = 0;
+            
+
+        </script>
+    </div>
+
+    
+</body>
+</html>

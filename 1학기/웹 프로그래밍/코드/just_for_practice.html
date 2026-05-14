@@ -1,70 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset = "UTF-8">
-    <title>제목입니다.</title>
+    <meta charset="UTF-8">
     <style>
-      [title = "제목"]{
-        font-weight : thick;
+      #myButton {
+        cursor: pointer;
+        padding: 8px 16px;
       }
-
-      body{
-        height : 1000px;
+      #myButton:hover {
+        background-color: blue;
+        color: white;
       }
-
-      div{
-        margin : auto auto;
-        transform : scale(1.34, 1.3);
-        background-color : blue;
-        width : 100px;
-        height : 100px;
-      }
-
-      a[href$=".pdf"]{
-        font-weight : thick;
-        text-decoration : underline;
-        opacity : 0.3;
-        color : white;
-        background-color :black;
-
-        position : static;
-        left : 50%;
-        top : 50%;
-
-        font-weight : 900;
-      }
-
-      input[type = "text"]:active{
-        background-color : orange;
-      }
-
-      img{
-        transform : translate(100px, 50px);
-        /* transform : rotate(30deg); */
-        /* transform : skew(30deg, 50deg); */
-        transform : scale(1.1, 2.1);
-
-        position : fixed;
-        right : 20px;
-        top : 10px;
-        
-      }
-
-
-    </style>    
+    </style>
   </head>
   <body>
-    <div>
-      <a href = "sdfsdfsdfsdf.pdf">안녕하세요</a>
+    <div id="myButton">
+      이벤트 핸들러용 버튼
     </div>
+    <script>
+      const button = document.querySelector("#myButton");
 
-    <label for = "name">이름</label>
-    <input type = "text" id = "name" name = "이름" placeholder = "이름을 입력하세요"/>
+      button.addEventListener("click", function() {
+        alert("버튼이 클릭되었습니다!");
+      });
 
-    <img width = "300px" height = "300px" alt = "tq" src = "ymyphoto-ai-generated-8689197_1920.jpg">
 
-    <iframe src = "just_for_practice.html" scrolling = "auto" height = "800px" frameborder = "1"></iframe>
-
+      let a = ["의자", "책상", "연필"];
+      for(let i = 0; i < a.length; i++){
+        document.write(a[i]);
+      }
+    </script>
   </body>
-  
 </html>

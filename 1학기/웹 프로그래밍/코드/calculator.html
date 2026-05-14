@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>계산기</title>
+
+  <style>
+    body{
+        text-align : center;
+        font-size : 45px;
+    }
+    input{
+      font-size: 45px;
+    }
+    select{
+      font-size : 45px;
+    }
+  </style>
+</head>
+<body>
+  <h2>계산기</h2>
+
+  <label>num1: <input type="number" id="num1" /></label><br><br>
+  <label>operator:
+    <select id="op">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="x">x</option>
+      <option value="/">/</option>
+    </select>
+  </label><br><br>
+  <label>num2: <input type="number" id="num2" /></label><br><br>
+
+  <button onclick="calculate()">계산</button>
+
+  <p id="result"></p>
+
+  <script>
+    function calculate() {
+      let n1 = parseFloat(document.getElementById('num1').value);
+      let n2 = parseFloat(document.getElementById('num2').value);
+      let op = document.getElementById('op').value;
+
+      if (isNaN(n1) || isNaN(n2)) {
+        document.getElementById('result').textContent = '숫자를 입력하세요.';
+        return;
+      }
+
+      let result;
+      if (op === '+') {
+        result = n1 + n2;
+      }
+      else if (op === '-') {
+        result = n1 - n2;
+      }
+      else if (op === 'x') {
+        result = n1 * n2;
+      }
+      else if (op === '/') {
+        if (n2 === 0) {
+          document.getElementById('result').textContent = '0으로 나눌 수 없습니다.'; 
+          return; 
+        }
+        result = n1 / n2;
+      }
+
+      document.getElementById('result').textContent = 'Result : ' + result;
+    }
+  </script>
+</body>
+</html>

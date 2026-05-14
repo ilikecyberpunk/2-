@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .page {
+            display: none;
+        }
+
+        #page1:checked ~ .album .p1,
+        #page2:checked ~ .album .p2,
+        #page3:checked ~ .album .p3 {
+            display: flex;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .album {
+            width: 600px;
+            margin: 0 auto;
+            border: 2px solid black;
+            padding: 20px;
+            background-color: lightblue;
+        }
+
+        .photo {
+            width: 150px;
+            height: 150px;
+            margin: 10px;
+            background-color: lightgray;
+            border: 2px solid gray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .buttons label {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            background-color: lightgray;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+        }
+
+        .buttons label:hover {
+            background-color: gray;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h2>나의 앨범</h2>
+
+    <input type="radio" name="page" id="page1" checked>
+    <input type="radio" name="page" id="page2">
+    <input type="radio" name="page" id="page3">
+
+    <div class="album">
+        <div class="page p1">
+            <div class="photo">사진1</div>
+            <div class="photo">사진2</div>
+            <div class="photo">사진3</div>
+        </div>
+        <div class="page p2">
+            <div class="photo">사진4</div>
+            <div class="photo">사진5</div>
+            <div class="photo">사진6</div>
+        </div>
+        <div class="page p3">
+            <div class="photo">사진7</div>
+            <div class="photo">사진8</div>
+            <div class="photo">사진9</div>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <label for="page1">1</label>
+        <label for="page2">2</label>
+        <label for="page3">3</label>
+    </div>
+</body>
+</html>

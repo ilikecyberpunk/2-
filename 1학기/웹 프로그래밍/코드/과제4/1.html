@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>과제4</title>
+    <style>
+        .box_layout {
+            background-color: skyblue;
+            display: flex;
+            height: 500px;
+            padding: 20px;
+            gap: 10px;
+            width : 600px
+        }
+
+        .menu {
+            background-color: lightgrey;
+            width: 25%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contents {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .content_top {
+            background-color: white;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid black;
+        }
+
+        .content_middle {
+            background-color: white;
+            flex: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid black;
+        }
+
+        .content_bottom {
+            background-color: white;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box_layout">
+        <div class="menu">MENU</div>
+        <div class="contents">
+            <div class="content_top">TOP</div>
+            <div class="content_middle">MIDDLE</div>
+            <div class="content_bottom">BOTTOM</div>
+        </div>
+    </div>
+</body>
+</html>
