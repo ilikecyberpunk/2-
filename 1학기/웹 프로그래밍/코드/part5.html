@@ -4,6 +4,8 @@
     <title>part5</title>
     <meta charset="UTF-8">
     <style>
+
+        
         .head {
             text-align: center;
             font-weight: 900;
@@ -34,6 +36,52 @@
         .for_for{
             border : 5px solid green;
         }
+
+        #element{
+            background-color: aqua;
+        }
+
+        @keyframes animate {
+            0% {
+                background:turquoise;
+            }
+
+            50%{
+                background : orange;
+            }
+
+            100%{
+                background : pink;
+            }
+        }
+
+        #element1{
+            animation: animate 3s infinite;
+        }
+
+        body{
+            animation: animate 5s infinite;
+        }
+
+        .stripe {
+                background: repeating-linear-gradient(
+                45deg,
+            #f200ff,
+            #ff0000 10px,
+            #83f173 10px,
+            #ffffff 20px
+        );
+        }
+
+        .sb{
+            border : 1px solid orange;
+        }
+
+        .sb:hover{
+            animation: animate 3s infinite;
+        }
+
+
     </style>
 </head>
 <body>
@@ -70,7 +118,19 @@
     </div>
 
 
+    <div>
+        <h1 id = "element">ELEMENT</h1>
+    </div>
 
+    <div>
+        <h1 id = "element1">ELEMENT1</h1>
+    </div>
+
+    <div>
+        <h1 class = "stripe">he</h1>
+        <h2 class = "stripe">llo</h2>
+        <h3 class = "stripe">there</h3>
+    </div>
 
 
 
@@ -150,8 +210,21 @@
                     break;
             }
 
-            let fd = 0;
+            //DOM 조작
+
+            // document.querySelector -> css선택자를 이용하여 첫 번째로 일치하는 요소 선택
+            let element = document.querySelector("#element");
+            element.innerHTML = "엘레멘트";
+
+            // document.getElementById => 특정 id값을 가진 요소 선택
+            let element1 = document.getElementById("element1").innerHTML = "요소1";
             
+            // document.querySelectorAll => 해당 요소를 모두 선택 -> nodelist로 변환
+            let element2 = document.querySelectorAll(".stripe").innerHTML = "요소2";
+
+            // document.getElementsByClassName => 특정 클래스 이름을 가진 요소를 HTMLCollection으로 반환한다
+            let element3 = document.getElementsByClassName("")
+
 
         </script>
     </div>
