@@ -4,8 +4,6 @@
     <title>part5</title>
     <meta charset="UTF-8">
     <style>
-
-        
         .head {
             text-align: center;
             font-weight: 900;
@@ -24,7 +22,6 @@
 
         .s{
             display : inline;
-            
         }
 
         .working{
@@ -45,11 +42,9 @@
             0% {
                 background:turquoise;
             }
-
             50%{
                 background : orange;
             }
-
             100%{
                 background : pink;
             }
@@ -64,13 +59,13 @@
         }
 
         .stripe {
-                background: repeating-linear-gradient(
+            background: repeating-linear-gradient(
                 45deg,
-            #f200ff,
-            #ff0000 10px,
-            #83f173 10px,
-            #ffffff 20px
-        );
+                #f200ff,
+                #ff0000 10px,
+                #83f173 10px,
+                #ffffff 20px
+            );
         }
 
         .sb{
@@ -81,59 +76,91 @@
             animation: animate 3s infinite;
         }
 
+        #mybutton{
+            border : 1px solid blue;
+        }
 
+        .for_button2{
+            transform : rotate(20deg);
+            border : 5px solid blue;
+        }
+
+        .damn{
+            width : 200px;
+            height : 100px;
+
+            text-align : center;
+            background-color : gray;
+            box-shadow: 10px 10px 10px;
+        }
+
+        .damn:hover{
+            background-color : black;
+            color : white;
+        }
+
+        #forPrompt{
+            width : 200px;
+            height : 100px;
+        }
+
+        .forConfirm{
+            width : 500;
+            height : 250;
+            background-color : cyan;
+            color : yellow;
+        }
     </style>
 </head>
 <body>
     <h1 class="head">part5 for js</h1>
 
     <h2 id="인사">hihi</h2>
-
-    <h3 id = "작별인사"></h3>
-
-
-
-
+    <h3 id="작별인사"></h3>
 
     <div>
-        <p class = "s">result : </p>
-        <p class = "s" id = "for_result"></p>
-    </div>
-    
-
-
-
-
-
-    <div>
-        <h2 class = "working">뭔요일인고 : </h2>
-        <h2 class = "working" id = "working"></h2>
-    </div>
-
-
-
-
-    <div>
-        <h2 class = "for_for"></h2>
-    </div>
-
-
-    <div>
-        <h1 id = "element">ELEMENT</h1>
+        <p class="s">result : </p>
+        <p class="s" id="for_result"></p>
     </div>
 
     <div>
-        <h1 id = "element1">ELEMENT1</h1>
+        <h2 class="working">뭔요일인고 : </h2>
+        <h2 class="working" id="working"></h2>
     </div>
 
     <div>
-        <h1 class = "stripe">he</h1>
-        <h2 class = "stripe">llo</h2>
-        <h3 class = "stripe">there</h3>
+        <h2 class="for_for"></h2>
     </div>
 
+    <div>
+        <h1 id="element">ELEMENT</h1>
+    </div>
 
+    <div>
+        <h1 id="element1">ELEMENT1</h1>
+    </div>
 
+    <div>
+        <h1 class="stripe">he</h1>
+        <h2 class="stripe">llo</h2>
+        <h3 class="stripe">there</h3>
+    </div>
+
+    <div>
+        <h1 class="sb">element3</h1>
+    </div>
+
+    <p class = "for_button2">나를 더블클릭해봐요</p>
+
+    <h6>ddddd</h6>
+
+    <h1 id="mybutton" style="font-size:100px;">안녕하세요</h1>
+
+    <h1 class = "damn">나를 클릭하시오</h1>
+
+    <h1 ><button id = "forPrompt">나를 클릭해봐</button></h1>
+
+    <h1 class = "forConfirm">로그인</h1>
 
     <div style="border: 1px solid red;">
         <script>
@@ -143,16 +170,14 @@
             let bb = "잘가";
             document.getElementById("작별인사").innerHTML = bb;
 
-            //자바 스크립트의 자료형
-            // 기본타입 : string, number, boolean, null, underfined, symbol
-            // 참조타입 : object, array, function
+            // 자료형 예시
             let str = "hello";
             let pi = 3.14;
             let isTrue = true;
             let obj = {name : "Alice", age : 25};
 
             console.log(typeof(obj));
-            console.log(typeof(pi)); // number
+            console.log(typeof(pi)); 
             console.log(typeof(str));
 
             let result2 = "12235";
@@ -162,18 +187,17 @@
             result3 = Number(result3);
 
             console.log(result2);
-            console.log(result3); // Nan뜸 = 숫자 연산에 실패함
+            console.log(result3); // NaN
 
             let result = "10" + 5;
-            let result1 = 5 + "10"; //암묵적으로 5가 string으로 형변환됨
+            let result1 = 5 + "10"; 
 
             document.write(result + "<br>");
             document.write(result1 + "<br>");
 
-
             let x;
             document.write(x + "<br>");
-            document.write(typeof(x) + "<br><br>")
+            document.write(typeof(x) + "<br><br>");
 
             let t = "how r u " + "today";
             document.write(t + "<br>");
@@ -181,10 +205,9 @@
 
             let person = {name : "charles", age : "22", gender : "male", country : "UK"};
             document.write(person.name + "<br>");
-            document.write(typeof(person.name) + "<br>"); // string
+            document.write(typeof(person.name) + "<br>"); 
 
-
-            //조건문
+            // 조건문
             let a1 = 12;
             let b1 = 23;
             if(a1 > b1){
@@ -205,30 +228,142 @@
                 case "thursday":
                     document.getElementById("working").innerHTML = "ncncncncnc";
                     break;
-                case "friday":a1
+                case "friday":
                     document.getElementById("working").innerHTML = "not nc anymore";
                     break;
             }
 
-            //DOM 조작
-
-            // document.querySelector -> css선택자를 이용하여 첫 번째로 일치하는 요소 선택
+            // DOM 조작
             let element = document.querySelector("#element");
             element.innerHTML = "엘레멘트";
 
-            // document.getElementById => 특정 id값을 가진 요소 선택
             let element1 = document.getElementById("element1").innerHTML = "요소1";
             
-            // document.querySelectorAll => 해당 요소를 모두 선택 -> nodelist로 변환
-            let element2 = document.querySelectorAll(".stripe").innerHTML = "요소2";
+            let element2 = document.querySelectorAll(".stripe");
+            element2.forEach(el => el.innerHTML = "요소2");
 
-            // document.getElementsByClassName => 특정 클래스 이름을 가진 요소를 HTMLCollection으로 반환한다
-            let element3 = document.getElementsByClassName("")
+            document.getElementsByClassName("sb")[0].innerHTML = "요소3";
+            document.getElementsByTagName("h6")[0].innerHTML = "요소4";
+
+            const newElement = document.createElement("div");
+            newElement.textContent = "새로운 요소";
+            document.body.appendChild(newElement);  
+
+            const elementToRemove = document.getElementsByClassName("stripe")[0];
+            elementToRemove.parentNode.removeChild(elementToRemove); 
+
+            // 이벤트 핸들링 + confirm/prompt 추가
 
 
+            //alert
+            const button = document.querySelector("#mybutton");
+            button.addEventListener("click" , function(){
+                let answer = confirm("정말 클릭하시겠습니까?");
+                if(answer){
+                    alert("확인 버튼을 누르셨습니다!");
+                } else {
+                    alert("취소 버튼을 누르셨습니다!");
+                }
+            });
+
+            let button2 = document.getElementsByClassName("for_button2")[0];
+            button2.addEventListener("dblclick", function(){
+                let name = prompt("당신의 이름을 입력해주세요:");
+                if(name){
+                    alert(name + "님, 반갑습니다!");
+                } else {
+                    alert("이름을 입력하지 않으셨네요!");
+                }
+            });
+
+            let button3 = document.getElementsByClassName("damn")[0];
+            button3.addEventListener("click", function(){
+                alert("버튼3가 클릭되었습니다");
+            });
+
+            //prompt
+            let msg = "";
+
+            let button4 = document.getElementById("forPrompt");
+            button4.addEventListener("dblclick", function(){
+                return prompt("아무거나 입력해봐");
+            });
+
+            //confirm    =>리턴값 true  or false임
+            let h1 = document.querySelector(".forConfirm").addEventListener("click", function(){confirm("당신은 성인이 확실합니까 ? ");}) 
+
+
+
+            //함수
+            function sayHello(){
+                 document.write("hello");
+            }
+
+            function showError(){
+                alert("에러입니다");
+            }
+
+            let name = "kimtaeho";
+
+            function hello(name){
+                let newName = name || `alina`;  //매개변수 입력하면 이름 나오고 아니면 alina
+                let msg = `Hello ${name}`; //벡틱 ``사용
+                document.write(msg+"<br>");
+            }
+
+            hello();
+            hello("kimtaeho");
+
+            //화살표 함수
+
+            let helloman = function(){
+                document.write('hello + <br>');
+            }
+
+            let helloman2 = (hello)=>{
+                document.write("인사 = " + hello + "<br>");
+            }
+
+            helloman2("ddd");
+
+            //객체
+            const diamond = {
+                name : "dustin",
+                stance : "southpaw"
+            }
+            
+            //접근
+            let k = diamond;
+            k.name = "d";
+
+            let j = diamond;
+            j['name'] = "j";
+
+            //추가
+            diamond.gender = "male";
+            diamond["color"] = "cyan";
+
+            
+            //삭제 
+            delete diamond.gender;
+
+
+            //객체 method
+            let superman = {
+                name : "clark",
+                age : null,
+                fly : function(){
+                    document.write(`${this.name} is flying`);
+                }
+            }
+
+            superman.fly();
+
+            
+
+
+            
         </script>
     </div>
-
-    
 </body>
 </html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>part7</title>
+    <meta charset="UTF-8">
+    <style>
+        body{
+            border : solid red 1px;
+            display : flex;
+            flex-direction : column;
+            justify-content: center;
+            align-items : center;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="one">tq</h1>
+    <h1 class="two">i miss</h1>
+    <h1 id="three">mommy</h1>
+    <h1 id="four">so</h1>
+    <h1>much</h1>
+    <input type = "button" value ="click" id = "bt1">
+
+    <script>
+        //dom 조작
+        document.querySelector("#one").textContent = "im sorry";
+        document.getElementsByClassName("two")[0].textContent = "i love u";
+        document.getElementById("three").textContent = "my momy";
+        document.querySelectorAll("#four")[0].textContent = "dont leave me";
+        document.body.style.backgroundColor = "cyan";
+
+        //dom수정
+        //요소 추가
+        const new_element = document.createElement("div");
+        new_element.textContent = "newElement";
+        document.body.appendChild(new_element);
+        //요소 삭제
+        new_element.parentNode.removeChild(new_element);
+
+        //이벤트 핸들링
+        let bt = document.getElementById("bt1").addEventListener("click", function(){
+            alert("button has just been clicked by u");
+        });
+
+        // let strange = document.getElementsByTagName("body");
+        // strange.addEventListener("dblclick", function(){
+        //     alert("dont do that");
+        // });
+
+        document.body.addEventListener("dblclick", function(){
+            prompt("dlqfur")
+        });
+
+        //jsp
+        // java언어를 기반으로 서버 측 웹 프로그래밍 기술
+        // 동적인 웹 페이지를 작성하는데 사용됨
+        // html문서 내부에서 java코드를 작성할 수 있도록 되어 있음 -> 웹에서 자바언어 사용 가능
+
+        // html - 웹브라우저, 정적페이지, 프로그래밍 불가능, db연동 불가능
+        // jsp - 웹 서버, 동적 페이지, 프로그래밍 가능, db연동 가능
+        
+    </script>
+    <p><%!
+        int
+        %></p>
+</body>
+</html>

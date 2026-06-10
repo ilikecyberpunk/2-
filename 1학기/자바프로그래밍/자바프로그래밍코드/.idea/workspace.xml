@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ef3d4db-65f3-4306-85f3-9425ce564ec1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../데이터베이스/GA3007-02(2026-03-12).pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../../데이터베이스/GA3007-02(2026-03-12).pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../웹 프로그래밍/코드/2주차part2실습1-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../웹 프로그래밍/코드/2주차part2실습1-1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../자료구조/1주차_알고리즘 (1).pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../../자료구조/1주차_알고리즘 (1).pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../웹 프로그래밍/2026_웹 프로그래밍_part6.pptx" beforeDir="false" afterPath="$PROJECT_DIR$/../../웹 프로그래밍/2026_웹 프로그래밍_part6.pptx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../웹 프로그래밍/코드/part5.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../웹 프로그래밍/코드/part5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../웹 프로그래밍/코드/practice_for_practicum.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../웹 프로그래밍/코드/practice_for_practicum.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +40,6 @@
     <attachedChunks>
       <set>
         <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.31033.145" />
       </set>
     </attachedChunks>
   </component>
@@ -53,6 +53,7 @@
       <workItem from="1773120746376" duration="22000" />
       <workItem from="1773120781365" duration="130000" />
       <workItem from="1773304295338" duration="4000" />
+      <workItem from="1779386908298" duration="5000" />
     </task>
     <servers />
   </component>

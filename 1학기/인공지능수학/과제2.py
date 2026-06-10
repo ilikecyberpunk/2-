@@ -1,52 +1,82 @@
+import matplotlib.pyplot as plt
 import numpy as np
 
-def validate_inputs(a, b):
-    if len(a) != len(b):
-        print("오류: 두 리스트의 크기가 서로 다릅니다.")
+def fdiff(f):
+    def diff(x):
+        h = 1e-8
+        return (f(x + h) - f(x - h)) / (2 * h)
+    return diff
+
+def f(x):
+    return 3 * (x - 5) ** 2 + 2
+
+def is_converged(x_prev, x, threshold):
+    if abs(x_prev - x) < threshold:
+        return True
+    else:
         return False
-    for item in a + b:
-        if not isinstance(item, (int, float)):
-            print(f"오류: 숫자가 아닌 문자 '{item}'이(가) 포함되어 있습니다.")
-            return False
-    return True
 
-def cosine_sim(a, b):
-    if not validate_inputs(a, b): return None
-    v1, v2 = np.array(a), np.array(b)
-    norm_a, norm_b = np.linalg.norm(v1), np.linalg.norm(v2)
-    result = 0.0 if norm_a == 0 or norm_b == 0 else np.dot(v1, v2) / (norm_a * norm_b)
-    return result
+def gradient_descent(f):
+    lr = 0.01
+    x = 100
+    threshold = 1e-8
+    t = 1
 
-def pearson_corr(a, b):
-    if not validate_inputs(a, b): return None
-    return np.corrcoef(a, b)[0, 1]
+    history_x = [x]
+    history_f = [f(x)]
 
-data = {
-    "D1": [0.82, 0.66, 0.51, 0.35, 0.75, 0.52, 0.62, 0.57],
-    "D2": [0.51, 0.21, 0.81, 0.31, 0.15, 0.41, 0.11, 0.21],
-    "D3": [0.19, 0.74, 0.24, 0.91, 0.81, 0.42, 0.43, 0.43],
-    "D4": [0.24, 0.82, 0.16, 0.85, 0.94, 0.53, 0.38, 0.55],
-    "D5": [0.40, 0.73, 0.53, 0.25, 0.83, 0.85, 0.55, 0.12],
-    "D6": [0.92, 0.24, 0.57, 0.57, 0.53, 0.97, 0.83, 0.77]
-}
+    while True:
+        x_prev = x
 
-vectors = list(data.keys())
-results = []
+        diff = fdiff(f)
+        g = diff(x)
 
-print("--- 모든 쌍에 대한 유사도 분석 결과 ---")
-for i in range(len(vectors)):
-    for j in range(i + 1, len(vectors)):
-        v1_name, v2_name = vectors[i], vectors[j]
-        c_sim = cosine_sim(data[v1_name], data[v2_name])
-        p_corr = pearson_corr(data[v1_name], data[v2_name])
-        results.append((v1_name, v2_name, c_sim, p_corr))
-        print(f"[{v1_name}-{v2_name}] 코사인: {c_sim:.4f} | 피어슨: {p_corr:.4f}")
+        x = x - lr * g
+        t += 1
 
-best_cos = max(results, key=lambda x: x[2])
-best_pea = max(results, key=lambda x: x[3])
+        history_x.append(x)
+        history_f.append(f(x))
 
-print(f"\n코사인 유사도 기준 가장 가까운 쌍: {best_cos[0]}-{best_cos[1]} ({best_cos[2]:.4f})")
-print(f"피어슨 상관 계수 기준 가장 가까운 쌍: {best_pea[0]}-{best_pea[1]} ({best_pea[3]:.4f})")
+        print(x)
 
+        if is_converged(x_prev, x, threshold):
+            break
 
+    return x, history_x, history_f
 
+result_x, history_x, history_f = gradient_descent(f)
+
+print("최적해:", result_x)
+print("최솟값:", f(result_x))
+
+x_range = np.linspace(-5, 110, 500)
+y_range = 3 * (x_range - 5) ** 2 + 2
+
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+ax1 = axes[0]
+ax1.plot(x_range, y_range, 'b-', linewidth=2, label='f(x) = 3(x-5)^2 + 2')
+n_show = min(30, len(history_x))
+ax1.scatter(history_x[:n_show], history_f[:n_show],
+            c=range(n_show), cmap='Reds', s=50, zorder=5, label='Search Path')
+ax1.scatter([result_x], [f(result_x)], color='red', s=200, zorder=6,
+            marker='*', label=f'Optimal x={result_x:.4f}')
+ax1.set_xlabel('x')
+ax1.set_ylabel('f(x)')
+ax1.set_title('Gradient Descent - Objective Function')
+ax1.legend()
+ax1.grid(True, alpha=0.3)
+ax1.set_xlim(-5, 110)
+
+ax2 = axes[1]
+ax2.plot(range(len(history_f)), history_f, 'r-o', markersize=3, linewidth=1.5)
+ax2.axhline(y=2, color='blue', linestyle='--', linewidth=1.5, label='Min f(x)=2')
+ax2.set_xlabel('Iteration (t)')
+ax2.set_ylabel('f(x)')
+ax2.set_title('Convergence of f(x)')
+ax2.legend()
+ax2.grid(True, alpha=0.3)
+ax2.set_yscale('log')
+
+plt.tight_layout()
+plt.show()

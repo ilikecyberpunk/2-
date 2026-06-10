@@ -1,27 +1,71 @@
 <!DOCTYPE html>
+<html>
 <head>
-    <title>practicum</title>
-    <meta charset = "UTF-8">
+    <title>d</title>
+    <meta charset="UTF-8">
+    <style>
+        .a{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            font-size: 100px;
+        }
+        .b{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            font-size: 200px;
+            background-color: cyan;
+            padding: 100px;
+        }
+        h1{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            font-size: 100px;
+            border: 10mm ridge rgba(1,1,1,1);
+        }
+    </style>
 </head>
 <body>
-    <video controls autoplay loop>
-        <source src = "333819_medium.mp4" controls >
-    </video>
+    <div class="a">        
+        <input type="button" id="button" value="click on this" onclick="prompt('input ur name')">
+    </div>
 
-    <ol>
-        <li>html
-            <ol>
-                <li>수업</li>
-                <li>사전</li>
-                <li>ebook</li>
-            </ol>
-        </li>
-        <li>css</li>
-        <li>javascript</li>
-        <li>os</li>
-        <li>jsp</li>
-        <li>database</li>
-    </ol>
+    <div class="b">DoubleClickAndResetUrName</div>
 
+    <div id="bt">(name)</div>
+
+    <h1><button class="button">delete</button></h1>
+
+    <h1></h1>
+
+    <script>
+        let nameDisplay = document.getElementById("bt");
+        let button = document.getElementById("button");
+
+        // 더블클릭 시 이름 변경
+        document.querySelector(".b").addEventListener("dblclick", function(){
+            let newName = prompt("input new name");
+            if(newName){
+                nameDisplay.innerHTML = newName;
+                button.value = newName; // name → newName 으로 수정
+            }
+        });
+
+        // 삭제 버튼 클릭 시 confirm
+        document.getElementsByClassName("button")[0].addEventListener("click", function(){
+            const result = confirm("ru sure that u gonna delete these all?");
+            if(result){
+                nameDisplay.innerHTML = "";
+                button.value = "";
+            } else {
+                alert("delete processing is canceled");
+            }
+        });
+
+        
+        
+    </script>
 </body>
-    
+</html>
