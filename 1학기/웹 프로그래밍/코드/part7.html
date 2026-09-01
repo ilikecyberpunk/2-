@@ -21,6 +21,18 @@
     <h1>much</h1>
     <input type = "button" value ="click" id = "bt1">
 
+    <!-- html에서 form tag를 이용해 jsp페이지에 전달 -->
+    <!-- <form name = "frm1" action="part7.jsp">
+        name : <input type = "text" name = "name">
+        <input type = "submit" >
+    </form> -->
+
+    <form action = "part7.jsp">
+        name : <input type = "text" name = "u_name">
+        <input type = "submit">
+    </form>
+
+
     <script>
         //dom 조작
         document.querySelector("#one").textContent = "im sorry";
@@ -50,6 +62,8 @@
         document.body.addEventListener("dblclick", function(){
             prompt("dlqfur")
         });
+
+
 
         
     </script>
