@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>카운터</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 40px;
+}
+
+#count {
+  font-size: 48px;
+  margin: 20px 0;
+}
+
+button {
+  font-size: 18px;
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #fd8a8a;
+}
+  </style>
+</head>
+<body>
+  <h1>카운터</h1>
+  <div id="count">0</div>
+  <button id="dec">- 1</button>
+  <button id="reset">Reset</button>
+  <button id="inc">+ 1</button>
+
+  <script> let count = 0;
+
+const countEl = document.getElementById("count");
+const incBtn = document.getElementById("inc");
+const decBtn = document.getElementById("dec");
+const resetBtn = document.getElementById("reset");
+
+function render() {
+  countEl.textContent = count;
+}
+
+incBtn.addEventListener("click", () => {
+  count++;
+  render();
+});
+
+decBtn.addEventListener("click", () => {
+  if (count > 0) {
+    count--
+    render()
+  }
+})
+
+resetBtn.addEventListener("click", () => {
+  count = 0;
+  render();
+});
+
+render();
+</script>
+</body>
+</html>

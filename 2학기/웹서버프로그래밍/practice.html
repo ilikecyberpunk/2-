@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 02</title>
+  <style>
+    .song:hover {
+        font-weight: bold;
+        font-size: 1.1rem;
+        background-color: #F1F785;
+    }
+    body{
+        display : flex;
+        flex-direction: column;
+        align-items: center;
+        background-color :rgb(255, 154, 228);
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    border : 30px black dashed;
+
+    }
+    .container:hover {
+  transform: scale(1.02);
+  font-weight: bold;
+}
+  h1{
+    border : 3px black solid;
+  }
+  ul{
+        border : 3px black solid;
+
+  }
+  li{
+        border : 3px black solid;
+
+  }
+  img{
+        border : 10px skyblue outset;
+
+  }
+  </style>
+</head>
+<body>
+  <h1>멜론 차트</h1>
+  <div>인기 순위</div>
+  <div class="container">
+    <!-- (div.container>a[href="https://www.youtube.com/results?search_query=노래방+노래제목!!!" target="_blank"]>img[src="https://picsum.photos/600/150?random=$" alt="랜덤 이미지 $"]+div.song-title{노래 제목!!!})*3 -->
+    <!-- 여기서 &표시는 *3이랑 연결 => 123 이런식으로 됨 -->
+     <!-- 아래는 해당 명령문을 실행한 결과 -->
+    <a href="https://www.youtube.com/results?search_query=노래방+노래제목!!!" target="_blank">
+        <img src="https://picsum.photos/600/150?random=1" alt="랜덤 이미지 1">
+        <div class="song-title">노래 제목!!!</div>
+    </a>
+  </div>
+  <div class="container">
+    <a href="https://www.youtube.com/results?search_query=노래방+노래제목!!!" target="_blank">
+        <img src="https://picsum.photos/600/150?random=2" alt="랜덤 이미지 2">
+        <div class="song-title">노래 제목!!!</div>
+    </a>
+  </div>
+  <div class="container">
+    <a href="https://www.youtube.com/results?search_query=노래방+노래제목!!!" target="_blank">
+        <img src="https://picsum.photos/600/150?random=3" alt="랜덤 이미지 3">
+        <div class="song-title">노래 제목!!!</div>
+    </a>
+  </div>
+<ul>
+    <li>
+      <div class="song">LOVE ATTACK</div>
+    </li>
+    <li>
+      <div class="song">갑자기</div>
+    </li>
+    <li>
+      <div class="song" id="item3">BiiiG</div>
+    </li>
+</ul>
+
+</body>
+</html>
