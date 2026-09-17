@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2d2d2d;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #333;
+}
+
+.container {
+  padding: 20px;
+}
+
+.timer-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px 36px 32px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  border: 1px solid #f5d0d0;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e74c3c;
+  margin-bottom: 12px;
+}
+
+.mode-label {
+  font-size: 0.95rem;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.timer-display {
+  font-size: 4.2rem;
+  font-weight: 700;
+  color: #e74c3c;
+  letter-spacing: 2px;
+  margin-bottom: 28px;
+  font-variant-numeric: tabular-nums;
+}
+
+.button-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: #e74c3c;
+  color: white;
+  min-width: 100px;
+}
+
+.btn-primary:hover {
+  background: #c0392b;
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  background: #f0f0f0;
+  color: #555;
+  min-width: 80px;
+}
+
+.btn-secondary:hover {
+  background: #e0e0e0;
+}
+
+.btn-outline {
+  background: #f8f8f8;
+  color: #666;
+  width: 100%;
+  border: 1px solid #e0e0e0;
+}
+
+.btn-outline:hover {
+  background: #f0f0f0;
+  color: #e74c3c;
+}
+
+/* 휴식 모드일 때 색상 변경 */
+.timer-card.rest-mode .title,
+.timer-card.rest-mode .timer-display {
+  color: #27ae60;
+}
+
+.timer-card.rest-mode {
+  border-color: #a8e6cf;
+}
+
+.timer-card.rest-mode .btn-primary {
+  background: #27ae60;
+}
+
+.timer-card.rest-mode .btn-primary:hover {
+  background: #219a52;
+}
+
+.timer-card.rest-mode .btn-outline:hover {
+  color: #27ae60;
+}
