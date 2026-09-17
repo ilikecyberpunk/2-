@@ -13,7 +13,7 @@ incBtn.addEventListener("click", () => {
   count++;
   render();
 });
-
+  
 decBtn.addEventListener("click", () => {
   if (count > 0) {
     count--;
