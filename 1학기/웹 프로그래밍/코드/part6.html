@@ -43,6 +43,8 @@
 
             document.write(typeof(students) + "<br>"); //object
 
+            students.forEach(a => document.write(a + "<br>"));
+
 
             //객체 method
             let superman = {
@@ -53,7 +55,16 @@
                 }
             }
 
+            let phone = {
+                name : samsung, status_of_bettery : "good", call : function(){
+                    document.write("phon is ringing" + "<br>");
+                }
+            }
+
             superman.fly();
+
+            document.write(phone.name);
+            phone.call();
 
             //객체 순회
             let person={name : "태호", age : 20};
@@ -71,9 +82,9 @@
             students.shift() //앞에서 삭제
 
             //반복처리
-            students.forEach(function(students, index){
-                document.write(index + ": " +students + "<br>");
-            });
+            students.forEach((students, index) =>
+                document.write(index + ": " +students + "<br>" + "kkk")
+            );
 
             let me = ["trash", "needy", "disgusting"];
             
@@ -121,6 +132,7 @@
             let tools = ["망치", "톱", "드라이버"];
             document.write(tools.includes("ㅅㅂ") + "<br>");
             document.write(tools.indexOf("톱") + "<br>");
+            document.write(tools.includes("dd"+"<br>"));
             //배열 인덱스를 초과한거나 없는걸 요구하면 undefined반환
 
             //객체배열
@@ -130,8 +142,15 @@
                 {name : "ㄱㅁㄸ"}
             ];
 
+            let cat = [
+                {species : "ordinary cat", height : "short", precious : "yes"},
+                {species : "lion", height :"long", precious:'yes but not as cutie'},
+                {species : "leopard", height:"middle", precious:"yes but scary"}
+            ]
+
             //있는지 확인 = includes대신 some
             document.write("<br>"+users.some(users => users.name === "수지") + "<br>");
+            document.write(cat.some(a => a.species ==="kitty") + "<br>");
 
             let people = [{n : "tq"}, {a : 22}, {h : 171}];
             document.write(people.some(p => p.n === "ddd") + "<br>");
@@ -146,6 +165,10 @@
             num2.forEach(function(a, b){
                 document.write(b + "번째 인덱스 값 : " + a +"<br>");
             })
+            
+            let num3 = num.filter(n => n.length %2 ===0).map(c => c*4);
+            num3.forEach((value, index)=>{document.write("this is num3,,,,,,,index : " + index  + ", value : " + value)});
+            
 
             //나이순 정렬
             let users2 = [
