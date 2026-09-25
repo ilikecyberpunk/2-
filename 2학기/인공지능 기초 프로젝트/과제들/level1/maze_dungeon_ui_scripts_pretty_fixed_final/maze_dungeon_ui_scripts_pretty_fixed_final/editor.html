@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>미로 만들기</title><style>
+*{box-sizing:border-box}body{margin:0;background:#0c0e12;color:#eef1f5;font-family:Arial,"Noto Sans KR",sans-serif}.page{width:min(1120px,94vw);margin:28px auto 60px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.brand{font-weight:800}.nav{display:flex;gap:7px;flex-wrap:wrap}.nav a{color:#a4acb8;text-decoration:none;background:#151920;border:1px solid #272d37;padding:8px 10px;border-radius:10px;font-size:12px}.layout{display:grid;grid-template-columns:1fr 300px;gap:16px}.card{background:#151920;border:1px solid #272d37;border-radius:18px;padding:18px}h1{margin:0;font-size:30px}.sub{color:#8e97a5;font-size:14px;margin:7px 0 18px}.tools{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:9px}button{background:#1a1f27;color:#edf0f5;border:1px solid #2c333f;border-radius:10px;padding:9px 10px;cursor:pointer}button:hover{background:#232934}.primary{background:#302858;border-color:#6558a8}#editor{display:grid;grid-template-columns:repeat(10,48px);gap:4px;justify-content:center}.cell{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;background:#171c24;box-shadow:inset 0 0 0 1px #262d37}.wall{background:#303642}.floor{background:#171c24}.start{background:#1d3445}.exit{background:#1f3a2e}.key{background:#3d3319}.lock{background:#343942}.trap{background:#43272c}textarea{width:100%;height:270px;background:#101319;color:#eef1f5;border:1px solid #2b323e;border-radius:12px;padding:11px;font:12px/1.5 Consolas,monospace;resize:vertical}.result{margin-top:10px;background:#101319;border:1px solid #2b323e;border-radius:11px;padding:11px;min-height:48px;color:#adb5c2;font-size:12px;line-height:1.7}.hint{color:#8d96a3;font-size:12px;line-height:1.8;margin-top:10px}@media(max-width:850px){.layout{grid-template-columns:1fr}#editor{grid-template-columns:repeat(10,36px)}.cell{width:36px;height:36px;font-size:17px}}
+</style></head><body><div class="page"><div class="top"><div class="brand">MAZE // EDITOR</div><div class="nav"><a href="/">게임</a><a href="/editor">미로 만들기</a><a href="/records">기록</a></div></div><h1>미로 만들기</h1><div class="sub">클릭으로 미로를 만들고 Java가 정상 여부를 검사한 뒤 게임에 적용합니다.</div><div class="layout"><section class="card"><div class="tools"><button onclick="tool='wall';draw()">🧱 벽</button><button onclick="tool='floor';draw()">⬜ 바닥</button><button onclick="tool='start';draw()">🏁 시작</button><button onclick="tool='exit';draw()">🚪 출구</button><button onclick="tool='key';draw()">🔑 열쇠</button><button onclick="tool='lock';draw()">🔒 문</button><button onclick="tool='trap';draw()">🕳️ 함정</button><button onclick="tool='erase';draw()">🧹 지우기</button></div><div class="tools"><button onclick="fillBorder()">외곽 벽</button><button onclick="clearInside()">내부 비우기</button><button onclick="gridToText()">화면 → 텍스트</button><button class="primary" onclick="validateApply()">검사 후 적용</button></div><div id="editor"></div><div class="hint">현재 도구: <b id="toolName">🧱 벽</b><br>테두리는 자동으로 벽으로 유지됩니다. S/E는 각각 하나만 둘 수 있습니다.</div></section><aside class="card"><h2 style="margin-top:0">텍스트 미로</h2><textarea id="mapText"></textarea><div class="tools" style="margin-top:8px"><button onclick="textToGrid()">텍스트 → 화면</button><button onclick="defaultMap()">예시 불러오기</button></div><div class="result" id="result">10×10 미로를 작성한 다음 [검사 후 적용]을 누르세요.</div><div class="hint">허용 문자: # 벽 · . 길 · S 시작 · E 출구 · K 열쇠 · L 문 · T 함정<br><br>Java가 10×10, 문자, S/E 개수, 테두리, 실제 탈출 가능 여부를 검사합니다.</div></aside></div></div><script>
+// ------------------------------
+// 에디터 상태
+// ------------------------------
+const SIZE = 10;
+
+let map = createEmptyMap();
+let tool = "wall";
+
+const ICONS = {
+    S: "🏁",
+    E: "🚪",
+    K: "🔑",
+    L: "🔒",
+    T: "🕳️"
+};
+
+const TOOL_NAMES = {
+    wall: "🧱 벽",
+    floor: "⬜ 바닥",
+    start: "🏁 시작",
+    exit: "🚪 출구",
+    key: "🔑 열쇠",
+    lock: "🔒 문",
+    trap: "🕳️ 함정",
+    erase: "🧹 지우기"
+};
+
+// ------------------------------
+// DOM 요소
+// ------------------------------
+const editor = document.getElementById("editor");
+const mapText = document.getElementById("mapText");
+const result = document.getElementById("result");
+const toolName = document.getElementById("toolName");
+
+// ------------------------------
+// 미로 초기화
+// ------------------------------
+function createEmptyMap() {
+    return Array.from({ length: SIZE }, (_, row) =>
+        Array.from({ length: SIZE }, (_, col) => {
+            const isBorder =
+                row === 0 ||
+                row === SIZE - 1 ||
+                col === 0 ||
+                col === SIZE - 1;
+
+            return isBorder ? "#" : ".";
+        })
+    );
+}
+
+function defaultMap() {
+    mapText.value = `##########
+#S...K.L.#
+###.###.##
+#...#....#
+#.#.#.##.#
+#.#...T..#
+#.#####.##
+#.......E#
+#........#
+##########`;
+
+    textToGrid();
+}
+
+// ------------------------------
+// 화면에 미로 그리기
+// ------------------------------
+function draw() {
+    editor.innerHTML = "";
+
+    for (let row = 0; row < SIZE; row++) {
+        for (let col = 0; col < SIZE; col++) {
+            const cell = createCell(row, col);
+            editor.appendChild(cell);
+        }
+    }
+
+    toolName.textContent = TOOL_NAMES[tool];
+}
+
+function createCell(row, col) {
+    const cell = document.createElement("div");
+    const value = map[row][col];
+
+    cell.className = "cell";
+
+    if (value === "#") {
+        cell.classList.add("wall");
+    } else if (value === "S") {
+        cell.classList.add("start");
+    } else if (value === "E") {
+        cell.classList.add("exit");
+    } else if (value === "K") {
+        cell.classList.add("key");
+    } else if (value === "L") {
+        cell.classList.add("lock");
+    } else if (value === "T") {
+        cell.classList.add("trap");
+    } else {
+        cell.classList.add("floor");
+    }
+
+    cell.textContent = ICONS[value] || "";
+    cell.onclick = () => paint(row, col);
+
+    return cell;
+}
+
+// ------------------------------
+// 칸 편집
+// ------------------------------
+function paint(row, col) {
+    // 바깥 테두리는 항상 벽으로 유지
+    if (isBorder(row, col)) {
+        map[row][col] = "#";
+        draw();
+        return;
+    }
+
+    if (tool === "start") {
+        removeExisting("S");
+        map[row][col] = "S";
+    } else if (tool === "exit") {
+        removeExisting("E");
+        map[row][col] = "E";
+    } else {
+        map[row][col] = getValueForTool(tool);
+    }
+
+    draw();
+    gridToText();
+}
+
+function isBorder(row, col) {
+    return (
+        row === 0 ||
+        row === SIZE - 1 ||
+        col === 0 ||
+        col === SIZE - 1
+    );
+}
+
+function removeExisting(value) {
+    for (let row = 0; row < SIZE; row++) {
+        for (let col = 0; col < SIZE; col++) {
+            if (map[row][col] === value) {
+                map[row][col] = ".";
+            }
+        }
+    }
+}
+
+function getValueForTool(selectedTool) {
+    const values = {
+        wall: "#",
+        floor: ".",
+        key: "K",
+        lock: "L",
+        trap: "T",
+        erase: "."
+    };
+
+    return values[selectedTool] || ".";
+}
+
+// ------------------------------
+// 일괄 편집
+// ------------------------------
+function fillBorder() {
+    for (let row = 0; row < SIZE; row++) {
+        for (let col = 0; col < SIZE; col++) {
+            if (isBorder(row, col)) {
+                map[row][col] = "#";
+            }
+        }
+    }
+
+    draw();
+    gridToText();
+}
+
+function clearInside() {
+    for (let row = 0; row < SIZE; row++) {
+        for (let col = 0; col < SIZE; col++) {
+            map[row][col] = isBorder(row, col) ? "#" : ".";
+        }
+    }
+
+    draw();
+    gridToText();
+}
+
+// ------------------------------
+// 텍스트 ↔ 화면 변환
+// ------------------------------
+function gridToText() {
+    mapText.value = map
+        .map(row => row.join(""))
+        .join("\n");
+}
+
+function textToGrid() {
+    const lines = mapText.value
+        .replace(/\r/g, "")
+        .split("\n")
+        .filter(line => line.length > 0);
+
+    if (
+        lines.length !== SIZE ||
+        lines.some(line => line.length !== SIZE)
+    ) {
+        result.textContent = "오류: 10×10 미로가 아닙니다.";
+        return;
+    }
+
+    map = lines.map(line => line.split(""));
+    draw();
+    result.textContent = "텍스트를 화면에 적용했습니다.";
+}
+
+// ------------------------------
+// Java에 사용자 미로 적용 요청
+// ------------------------------
+async function validateApply() {
+    gridToText();
+
+    const response = await fetch("/api/custom", {
+        method: "POST",
+        headers: {
+            "Content-Type": "text/plain; charset=UTF-8"
+        },
+        body: mapText.value
+    });
+
+    const data = await response.json();
+
+    result.textContent = data.error
+        ? `❌ ${data.error}`
+        : "✅ 정상 미로입니다. 게임에 적용했습니다.";
+}
+
+// ------------------------------
+// 초기 화면
+// ------------------------------
+defaultMap();
+</script></body></html>

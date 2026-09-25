@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>미로 탈출</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0c0e12;color:#eef1f5;font-family:Arial,"Noto Sans KR",sans-serif}
+.page{width:min(1100px,94vw);margin:28px auto 60px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.brand{font-weight:800;letter-spacing:.3px}.nav{display:flex;gap:7px;flex-wrap:wrap}.nav a{color:#a4acb8;text-decoration:none;background:#151920;border:1px solid #272d37;padding:8px 10px;border-radius:10px;font-size:12px}.nav a:hover{color:#fff}
+.hero{margin-bottom:16px}.hero h1{margin:0;font-size:32px;letter-spacing:-1px}.hero p{margin:7px 0;color:#8e97a5;font-size:14px}
+.layout{display:grid;grid-template-columns:1fr 290px;gap:16px}.card{background:#151920;border:1px solid #272d37;border-radius:18px;padding:18px;box-shadow:0 14px 35px rgba(0,0,0,.2)}
+.controls{display:flex;gap:7px;flex-wrap:wrap}button,select{background:#1a1f27;color:#edf0f5;border:1px solid #2c333f;border-radius:10px;padding:9px 11px;font-size:13px;cursor:pointer}button:hover{background:#222832}.primary{background:#302858;border-color:#6257a4}
+.status{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}.stat{background:#101319;border:1px solid #262d37;border-radius:11px;padding:10px}.label{font-size:11px;color:#7f8897}.value{font-weight:800;margin-top:5px}
+#message{min-height:23px;color:#b7bec9;font-size:13px;margin:8px 0 10px}
+#board{display:grid;gap:4px;justify-content:center;margin:10px auto 4px}.cell{width:50px;height:50px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:25px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);position:relative;user-select:none}
+.wall{background:linear-gradient(145deg,#333946,#22262e);box-shadow:inset 0 0 0 1px #3c4450,inset 0 -8px 12px rgba(0,0,0,.2)}.road{background:#181d25}.start{background:#1e3547}.exit{background:#1e3a2d}.key{background:#40351a}.lock{background:#343941}.trap{background:#42282d}.player{background:radial-gradient(circle,#a89fff,#6f65bd);color:white;box-shadow:0 0 18px rgba(155,140,255,.5)}.visited{box-shadow:inset 0 0 0 3px rgba(108,181,250,.32)}.shortest{box-shadow:inset 0 0 0 3px rgba(187,170,255,.78),0 0 8px rgba(187,170,255,.15)}
+.legend{color:#8d96a3;font-size:12px;line-height:1.8;margin-top:8px}.rule{background:#101319;border:1px solid #272e38;border-radius:10px;padding:10px;color:#aab2be;font-size:12px;line-height:1.8}h2{font-size:15px;margin:0 0 9px}.records{margin-top:8px;background:#101319;border:1px solid #272e38;border-radius:10px;padding:10px;min-height:80px;white-space:pre-wrap;color:#dbe1e8;font-size:12px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.cell{width:38px;height:38px;font-size:19px}}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="top"><div class="brand">MAZE // GAME</div><div class="nav"><a href="/">게임</a><a href="/editor">미로 만들기</a><a href="/records">기록</a></div></div>
+<div class="hero"><h1>미로 탈출</h1><p>어두운 미로를 탐색하고, 열쇠를 찾아 출구를 통과하세요.</p></div>
+<div class="layout">
+<main class="card">
+<div class="controls">
+<select id="mazeSelect"><option value="1">미로 1</option><option value="2">미로 2</option><option value="3">미로 3</option><option value="generated">자동 생성</option><option value="custom">사용자 미로</option></select>
+<select id="timeSelect"><option value="1">60초 제한</option><option value="0">제한 없음</option></select>
+<button class="primary" onclick="startGame()">게임 시작</button>
+<button onclick="showPath()">BFS 경로</button>
+<button onclick="autoEscape()">자동 탈출</button>
+<button onclick="saveGame()">저장</button>
+<button onclick="loadGame()">이어하기</button>
+<button onclick="endGame()">게임 종료</button>
+</div>
+<div class="status"><div class="stat"><div class="label">현재 미로</div><div class="value" id="mazeName">-</div></div><div class="stat"><div class="label">이동 횟수</div><div class="value" id="moves">0</div></div><div class="stat"><div class="label">시간</div><div class="value" id="time">0 / 60</div></div></div>
+<div id="message">Java 서버에 연결하는 중...</div>
+<div id="board"></div>
+<div class="legend">🏁 시작 · 🔑 열쇠 · 🔒 잠긴 문 · 🕳️ 함정 · 🚪 출구 · 🧭 플레이어<br>파란 테두리 = 지나온 경로 · 보라색 테두리 = Java BFS 최단 경로 · W/A/S/D 이동</div>
+</main>
+<aside class="card">
+<h2>현재 상태</h2>
+<div class="status" style="grid-template-columns:1fr 1fr"><div class="stat"><div class="label">열쇠</div><div class="value" id="key">없음</div></div><div class="stat"><div class="label">게임</div><div class="value" id="playing">대기</div></div></div>
+<h2 style="margin-top:18px">규칙</h2><div class="rule">벽/미로 밖 이동 금지<br>🔑 획득 후 🔒 통과 가능<br>🕳️ 함정 → 시작점 복귀 + 이동 2회<br>게임 중 상태는 Java가 자동 저장<br>BFS는 열쇠/문 상태까지 고려</div>
+<h2 style="margin-top:18px">기록</h2><button onclick="showRecords()">기록 불러오기</button><div id="records" class="records">기록 없음</div>
+</aside>
+</div></div>
+<script>
+// ------------------------------
+// 게임 상태
+// ------------------------------
+let shortest = new Set();
+let autoRunning = false;
+
+const MOVE_KEYS = ["W", "A", "S", "D"];
+const ICONS = {
+    S: "🏁",
+    E: "🚪",
+    K: "🔑",
+    L: "🔒",
+    T: "🕳️"
+};
+
+// ------------------------------
+// DOM 요소
+// ------------------------------
+const mazeSelect = document.getElementById("mazeSelect");
+const timeSelect = document.getElementById("timeSelect");
+const message = document.getElementById("message");
+const mazeName = document.getElementById("mazeName");
+const movesText = document.getElementById("moves");
+const timeText = document.getElementById("time");
+const keyText = document.getElementById("key");
+const playingText = document.getElementById("playing");
+const board = document.getElementById("board");
+const recordsBox = document.getElementById("records");
+
+// ------------------------------
+// Java API 통신
+// ------------------------------
+async function api(url, options = {}) {
+    const response = await fetch(url, options);
+    return await response.json();
+}
+
+// ------------------------------
+// 게임 시작 / 이동
+// ------------------------------
+async function startGame() {
+    shortest.clear();
+
+    const type = mazeSelect.value;
+    const time = timeSelect.value;
+
+    let serverType = "maze";
+    let mazeNumber = 1;
+
+    if (type === "2") {
+        mazeNumber = 2;
+    } else if (type === "3") {
+        mazeNumber = 3;
+    } else if (type === "generated") {
+        serverType = "generated";
+    } else if (type === "custom") {
+        serverType = "custom";
+    }
+
+    const state = await api(
+        `/api/start?type=${serverType}&n=${mazeNumber}&time=${time}`
+    );
+
+    render(state);
+}
+
+async function move(direction) {
+    if (autoRunning) {
+        return;
+    }
+
+    shortest.clear();
+
+    const state = await api(`/api/move?dir=${direction}`);
+    render(state);
+}
+
+// ------------------------------
+// 화면 갱신
+// ------------------------------
+function render(state) {
+    if (state.error) {
+        message.textContent = `❌ ${state.error}`;
+        return;
+    }
+
+    mazeName.textContent = state.maze;
+    movesText.textContent = state.moves;
+    timeText.textContent = state.timed
+        ? `${state.elapsed} / 60`
+        : `${state.elapsed} / ∞`;
+    keyText.textContent = state.key ? "획득" : "없음";
+    playingText.textContent = state.playing
+        ? "진행 중"
+        : state.success
+            ? "성공"
+            : "종료";
+    message.textContent = state.message;
+
+    draw(state);
+}
+
+function draw(state) {
+    board.innerHTML = "";
+    board.style.gridTemplateColumns = `repeat(${state.map[0].length}, 50px)`;
+
+    for (let row = 0; row < state.map.length; row++) {
+        for (let col = 0; col < state.map[row].length; col++) {
+            const cell = createCell(state, row, col);
+            board.appendChild(cell);
+        }
+    }
+}
+
+function createCell(state, row, col) {
+    const cell = document.createElement("div");
+    const value = state.map[row][col];
+    const position = `${row},${col}`;
+
+    cell.className = "cell";
+
+    // 미로 요소별 스타일
+    if (value === "#") {
+        cell.classList.add("wall");
+    } else if (value === "S") {
+        cell.classList.add("start");
+    } else if (value === "E") {
+        cell.classList.add("exit");
+    } else if (value === "K") {
+        cell.classList.add("key");
+    } else if (value === "L") {
+        cell.classList.add("lock");
+    } else if (value === "T") {
+        cell.classList.add("trap");
+    } else {
+        cell.classList.add("road");
+    }
+
+    // 방문 경로 / BFS 최단 경로 표시
+    if (state.visited.includes(position)) {
+        cell.classList.add("visited");
+    }
+
+    if (shortest.has(position)) {
+        cell.classList.add("shortest");
+    }
+
+    // 플레이어 표시
+    if (row === state.player.row && col === state.player.col) {
+        cell.className = "cell player";
+        cell.textContent = "🧭";
+    } else {
+        cell.textContent = ICONS[value] || "";
+    }
+
+    return cell;
+}
+
+// ------------------------------
+// BFS 최단 경로 / 자동 탈출
+// ------------------------------
+async function showPath() {
+    const result = await api("/api/path");
+
+    if (!result.found) {
+        message.textContent = "❌ 출구까지 갈 수 있는 경로가 없습니다.";
+        return;
+    }
+
+    shortest = new Set(result.path);
+    message.textContent = `Java BFS 최단 경로: ${result.length}칸`;
+
+    render(await api("/api/state"));
+}
+
+async function autoEscape() {
+    if (autoRunning) {
+        return;
+    }
+
+    const result = await api("/api/path");
+
+    if (!result.found) {
+        message.textContent = "❌ 자동 탈출 경로가 없습니다.";
+        return;
+    }
+
+    shortest = new Set(result.path);
+    autoRunning = true;
+
+    for (let i = 1; i < result.path.length; i++) {
+        const [prevRow, prevCol] = result.path[i - 1]
+            .split(",")
+            .map(Number);
+        const [nextRow, nextCol] = result.path[i]
+            .split(",")
+            .map(Number);
+
+        let direction = "";
+
+        if (nextRow === prevRow - 1) {
+            direction = "W";
+        } else if (nextRow === prevRow + 1) {
+            direction = "S";
+        } else if (nextCol === prevCol - 1) {
+            direction = "A";
+        } else if (nextCol === prevCol + 1) {
+            direction = "D";
+        }
+
+        const state = await api(`/api/move?dir=${direction}`);
+        render(state);
+
+        if (!state.playing) {
+            break;
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 120));
+    }
+
+    autoRunning = false;
+}
+
+// ------------------------------
+// 저장 / 불러오기 / 종료
+// ------------------------------
+async function saveGame() {
+    render(await api("/api/save"));
+}
+
+async function loadGame() {
+    shortest.clear();
+    render(await api("/api/load"));
+}
+
+async function endGame() {
+    render(await api("/api/end"));
+}
+
+// ------------------------------
+// 기록 표시
+// ------------------------------
+async function showRecords() {
+    const result = await api("/api/records");
+    let text = "";
+
+    if (result.highscores.length) {
+        text += "최고 기록\n";
+        text += result.highscores.join("\n");
+        text += "\n\n";
+    }
+
+    if (result.records.length) {
+        text += "플레이 기록\n";
+        text += result.records.join("\n");
+    }
+
+    recordsBox.textContent = text || "아직 기록이 없습니다.";
+}
+
+// ------------------------------
+// 키보드 입력
+// ------------------------------
+document.addEventListener("keydown", event => {
+    const key = event.key.toUpperCase();
+
+    if (MOVE_KEYS.includes(key)) {
+        move(key);
+    }
+});
+
+// ------------------------------
+// 주기적인 상태 확인
+// ------------------------------
+async function loadState() {
+    render(await api("/api/state"));
+}
+
+startGame();
+
+setInterval(() => {
+    if (!autoRunning) {
+        loadState();
+    }
+}, 1000);
+</script>
+</body>
+</html>

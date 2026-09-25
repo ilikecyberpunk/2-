@@ -1,0 +1,140 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+  background: #fff1f1;
+  color: #20283a;
+}
+
+button {
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 20px;
+}
+
+.timer-card {
+  width: min(100%, 430px);
+  background: white;
+  border-radius: 28px;
+  padding: 42px 32px 34px;
+  text-align: center;
+  box-shadow: 0 18px 50px rgba(35, 43, 60, 0.12);
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: #f06464;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: -1.5px;
+}
+
+.mode-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.mode {
+  border: 0;
+  border-radius: 9px;
+  padding: 11px 19px;
+  background: #eef1f5;
+  color: #7d8797;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.mode.active {
+  background: #f06464;
+  color: white;
+}
+
+.time {
+  margin: 30px 0;
+  font-size: clamp(64px, 17vw, 92px);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.control-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.control-buttons button {
+  border-radius: 10px;
+  padding: 12px 22px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.primary {
+  border: 2px solid #20283a;
+  background: #f06464;
+  color: white;
+}
+
+.secondary {
+  border: 0;
+  background: #eef1f5;
+  color: #778295;
+}
+
+.session-count {
+  margin: 28px 0 14px;
+  color: #8490a2;
+}
+
+.session-count strong {
+  color: #4b5568;
+}
+
+.record-button {
+  border: 1px solid #e0e5ec;
+  border-radius: 9px;
+  padding: 10px 16px;
+  background: white;
+  color: #687386;
+  cursor: pointer;
+}
+
+.record-button:hover,
+.secondary:hover,
+.mode:hover {
+  filter: brightness(0.97);
+}
+
+.primary:hover {
+  filter: brightness(0.95);
+}
+
+@media (max-width: 480px) {
+  .timer-card {
+    padding: 34px 22px 28px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+}

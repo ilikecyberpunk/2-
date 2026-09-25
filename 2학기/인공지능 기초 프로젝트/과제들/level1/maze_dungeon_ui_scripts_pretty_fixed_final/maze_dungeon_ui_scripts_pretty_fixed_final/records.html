@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>기록</title><style>*{box-sizing:border-box}body{margin:0;background:#0c0e12;color:#eef1f5;font-family:Arial,"Noto Sans KR",sans-serif}.page{width:min(900px,94vw);margin:28px auto}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.brand{font-weight:800}.nav{display:flex;gap:7px;flex-wrap:wrap}.nav a{color:#a4acb8;text-decoration:none;background:#151920;border:1px solid #272d37;padding:8px 10px;border-radius:10px;font-size:12px}.card{background:#151920;border:1px solid #272d37;border-radius:18px;padding:18px;margin-bottom:15px}h1{margin:0;font-size:30px}.sub{color:#8e97a5;margin:8px 0 18px;font-size:14px}h2{font-size:15px;margin:0 0 9px}pre{background:#101319;border:1px solid #2b323e;border-radius:12px;padding:13px;white-space:pre-wrap;color:#dfe3e9;min-height:70px;font:12px/1.6 Consolas,monospace}button{background:#1a1f27;color:#edf0f5;border:1px solid #2c333f;border-radius:10px;padding:9px 11px;cursor:pointer}</style></head><body><div class="page"><div class="top"><div class="brand">MAZE // RECORDS</div><div class="nav"><a href="/">게임</a><a href="/editor">미로 만들기</a><a href="/records">기록</a></div></div><h1>기록</h1><div class="sub">Java가 저장한 최고 기록과 전체 플레이 기록입니다.</div><div class="card"><h2>최고 기록</h2><pre id="high">불러오는 중...</pre></div><div class="card"><h2>전체 기록</h2><pre id="all">불러오는 중...</pre></div></div><script>
+// ------------------------------
+// 기록 불러오기
+// ------------------------------
+async function loadRecords() {
+    const response = await fetch("/api/records");
+    const data = await response.json();
+
+    const highText = data.highscores.length
+        ? data.highscores.join("\n")
+        : "아직 최고 기록이 없습니다.";
+
+    const allText = data.records.length
+        ? data.records.join("\n")
+        : "아직 플레이 기록이 없습니다.";
+
+    document.getElementById("high").textContent = highText;
+    document.getElementById("all").textContent = allText;
+}
+
+loadRecords();
+</script></body></html>

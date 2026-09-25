@@ -1,0 +1,22 @@
+chap4 리눅스 들여다복기 2
+
+8진수 모드 rwx 를 각각 하나의 비트로 표현 권한허용  -1 불허 -0
+rwxr-xr-x = 111101101 = 755
+
+특수모드 
+s (setui, setgid), t(sticky bit)
+
+하드링크 = 1
+
+오픈소스 mvㄲㅈ
+
+chmod -> 파일의 권한 바꾸기
+모든 놈 권한 없 chmod a-x 이름
+모든놈 모든 권한 chmod a+rwx 이름
+
+ln =링크 만들기
+ln -s 파일이름 링크이름
+ln -s a thisisLinkOfa
+
+
+
