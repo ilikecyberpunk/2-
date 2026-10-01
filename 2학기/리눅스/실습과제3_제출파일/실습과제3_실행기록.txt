@@ -1,0 +1,93 @@
+실습 과제 #3 파일 관리 - 실행 기록
+학번:
+이름:
+실습일: 2026-09-30
+
+1. mkdir lab3
+명령: mkdir lab3
+결과:
+
+2. cd lab3
+명령: cd lab3
+확인: pwd
+결과:
+
+3. 심볼릭 링크
+명령: ln -s /etc myetc
+확인: ls -l myetc
+결과:
+
+4. 목록
+명령: ls -alR myetc
+결과:
+
+5. fstab 이동
+명령: mv myetc/fstab .
+오류/결과:
+
+6. 오류 원인
+일반 사용자는 /etc 디렉터리에 쓰기 권한이 없기 때문에 Permission denied가 발생할 수 있다.
+
+7. s로 시작하는 항목 복사
+명령: cp -r /etc/s* .
+결과:
+
+8. 복사 불가능한 파일
+명령: cp -r /etc/s* . 2> error.txt
+확인: cat error.txt
+개수: grep -c "Permission denied" error.txt
+실제 개수:
+원인:
+
+9. 자식 디렉터리가 가장 많은 디렉터리
+명령:
+find . -mindepth 1 -type d -print0 | while IFS= read -r -d '' d; do
+  count=$(find "$d" -mindepth 1 -maxdepth 1 -type d | wc -l)
+  echo "$count $d"
+done | sort -nr
+실제 결과:
+
+10. 디렉터리 삭제
+명령: rm -rf [9번 결과]
+결과:
+
+11. .conf 권한 확인
+명령: find . -type f -name "*.conf" -exec ls -l {} \;
+결과:
+
+12. 기타 사용자 권한 제거
+명령: find . -type f -name "*.conf" -exec chmod o-rwx {} \;
+확인: find . -type f -name "*.conf" -exec ls -l {} \;
+결과:
+
+13. 가장 큰 일반 파일 압축
+명령: find . -maxdepth 1 -type f -printf '%s %p
+' | sort -nr
+압축: gzip -v [가장 큰 파일]
+파일:
+압축률:
+
+14. ssh.tgz 생성
+명령: tar czvf ssh.tgz ssh
+결과:
+
+15. 압축 해제
+명령: tar xzvf ssh.tgz
+생성: ssh
+결과:
+
+16. archive 내부 목록
+명령: tar tzvf ssh.tgz
+결과:
+
+17. ssh 상세 목록
+명령: ls -alR ssh
+비교 결과:
+
+18. 상위 디렉터리 이동
+명령: cd ..
+확인: pwd
+결과:
+
+[실습 소감]
+이번 실습을 통해 Linux 파일 관리 명령어와 파일 권한, 심볼릭 링크, 복사/삭제, tar 및 gzip 압축 과정을 학습하였다. 특히 Permission denied 오류를 통해 파일을 읽을 수 있는 권한과 파일을 이동하거나 삭제할 수 있는 권한이 다르다는 점을 이해하였다.

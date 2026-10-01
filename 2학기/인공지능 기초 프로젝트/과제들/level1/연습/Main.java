@@ -44,13 +44,13 @@ public class Main {
         "##########",
 
         "##########\n" +
-        "#S....K..#\n" +
+        "#S...K...#\n" +
+        "###.#.####\n" +
+        "#...#L...#\n" +
+        "#.#.#.##.#\n" +
+        "#.#...T..#\n" +
         "#.#####.##\n" +
-        "#.....#.L#\n" +
-        "#####.#..#\n" +
-        "#T....#..#\n" +
-        "#.######.#\n" +
-        "#......E.#\n" +
+        "#.......E#\n" +
         "#........#\n" +
         "##########",
 
@@ -69,10 +69,12 @@ public class Main {
     static Path findBaseDir() {
         Path current = Path.of("").toAbsolutePath().normalize();
 
-        if (Files.exists(current.resolve("index.html"))) {
-            return current;
-        }
+        // 1) 현재 작업 폴더와 상위 폴더에서 프로젝트 루트를 먼저 찾습니다.
+        Path found = findProjectRoot(current, 8);
+        if (found != null) return found;
 
+        // 2) VS Code Java 확장 기능은 별도의 JDT workspace/bin에서 Main.class를
+        //    실행할 수 있으므로, class 파일 위치의 상위 폴더에서도 찾습니다.
         try {
             Path location = Path.of(
                     Main.class.getProtectionDomain()
@@ -86,18 +88,56 @@ public class Main {
                 location = location.getParent();
             }
 
-            Path check = location;
-            for (int i = 0; i < 6 && check != null; i++) {
-                if (Files.exists(check.resolve("index.html"))) {
-                    return check;
-                }
-                check = check.getParent();
-            }
+            found = findProjectRoot(location, 8);
+            if (found != null) return found;
         } catch (Exception ignored) {
-            // 현재 작업 폴더를 마지막 후보로 사용합니다.
+            // 다음 탐색으로 넘어갑니다.
         }
 
+        // 3) VS Code JDT workspace와 실제 프로젝트 폴더가 분리된 경우를 대비해
+        //    사용자의 Downloads/Desktop에서 프로젝트 루트를 찾습니다.
+        Path home = Path.of(System.getProperty("user.home", ""));
+        Path[] commonRoots = {
+                home.resolve("Downloads"),
+                home.resolve("Desktop")
+        };
+
+        for (Path root : commonRoots) {
+            found = searchProjectRoot(root, 5);
+            if (found != null) return found;
+        }
+
+        // 프로젝트를 찾지 못한 경우 현재 폴더를 사용합니다.
         return current;
+    }
+
+    static Path findProjectRoot(Path start, int maxUp) {
+        Path check = start;
+        for (int i = 0; i <= maxUp && check != null; i++) {
+            if (isProjectRoot(check)) return check;
+            check = check.getParent();
+        }
+        return null;
+    }
+
+    static boolean isProjectRoot(Path dir) {
+        return Files.exists(dir.resolve("Main.java"))
+                && Files.exists(dir.resolve("index.html"))
+                && Files.exists(dir.resolve("maze1.txt"));
+    }
+
+    static Path searchProjectRoot(Path root, int maxDepth) {
+        if (!Files.isDirectory(root)) return null;
+
+        try (var stream = Files.walk(root, maxDepth)) {
+            return stream
+                    .filter(Files::isDirectory)
+                    .filter(Main::isProjectRoot)
+                    .findFirst()
+                    .orElse(null);
+        } catch (IOException ignored) {
+            return null;
+        }
     }
 
     static Path dataPath(String name) {
@@ -105,8 +145,8 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
-        initFiles();
-        Game game = new Game();
+        initFiles(); //게임 실행에 필요한 미로 및 기록 파일이 없을 경우 생성해서 실행 환경을 준비합니다."
+        Game game = new Game(); //게임을 실제로 관리할 Game 객체를 하나 만든다.
 
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
 
@@ -160,7 +200,7 @@ public class Main {
                 byte[] data = Files.readAllBytes(dataPath(file));
                 e.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
                 e.sendResponseHeaders(200, data.length);
-                e.getResponseBody().write(data);
+                e.getResponseBody().write(data);    
                 e.close();
             } catch (IOException ex) {
                 e.sendResponseHeaders(404, 0);
@@ -171,7 +211,7 @@ public class Main {
 
     static void initFiles() throws IOException {
         for (int i = 0; i < DEFAULT_MAZES.length; i++) {
-            Path file = Path.of("maze" + (i + 1) + ".txt");
+            Path file = dataPath("maze" + (i + 1) + ".txt");
             if (!Files.exists(file)) {
                 Files.writeString(file, DEFAULT_MAZES[i], StandardCharsets.UTF_8);
             }
@@ -252,7 +292,7 @@ public class Main {
         String message = "게임을 시작하세요.";
         List<String> history = new ArrayList<>();
 
-        String start(String type, int number, boolean timeMode) {
+        String start(String type, int number, boolean timeMode) {       
             try {
                 timed = timeMode;
 
@@ -266,7 +306,7 @@ public class Main {
                 } else {
                     number = Math.max(1, Math.min(3, number));
                     load(Files.readString(
-                            Path.of("maze" + number + ".txt"),
+                            dataPath("maze" + number + ".txt"),
                             StandardCharsets.UTF_8));
                     mazeName = "미로 " + number;
                 }
