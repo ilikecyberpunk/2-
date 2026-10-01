@@ -15,7 +15,7 @@ function App() {
 }
 
 function Counter(props) {
-
+  
   return (
     <div>
       <h1>Counter: {props.count}</h1>
